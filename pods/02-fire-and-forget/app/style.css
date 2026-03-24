@@ -1,0 +1,474 @@
+/* Pod 02: Connection Dashboard — Dark Theme */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+	background: #1a1a2e;
+	color: #e0e0e0;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	line-height: 1.6;
+	min-height: 100vh;
+	padding: 2rem;
+}
+
+header {
+	text-align: center;
+	margin-bottom: 3rem;
+	padding-bottom: 2rem;
+	border-bottom: 2px solid #2B7A4B;
+}
+
+h1 {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 0.5rem;
+}
+
+.subtitle {
+	font-size: 1.1rem;
+	color: #a0a0b8;
+	margin-bottom: 1rem;
+}
+
+.status-summary {
+	display: inline-block;
+	background: #16213e;
+	border: 1px solid #2a3a5c;
+	border-radius: 24px;
+	padding: 0.5rem 1.5rem;
+	font-size: 1rem;
+	font-weight: 500;
+	color: #a0a0b8;
+}
+
+.summary-count {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #0f9b58;
+}
+
+.section {
+	margin-bottom: 3rem;
+}
+
+h2 {
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: #4A90D9;
+	margin-bottom: 1rem;
+	padding-left: 0.5rem;
+	border-left: 3px solid #4A90D9;
+}
+
+.section-intro {
+	color: #a0a0b8;
+	margin-bottom: 1.25rem;
+	font-size: 0.95rem;
+	padding-left: 0.5rem;
+}
+
+/* Status cards grid */
+.status-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1rem;
+}
+
+.status-card {
+	background: #16213e;
+	border: 1px solid #2a3a5c;
+	border-radius: 12px;
+	padding: 1.25rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+}
+
+.status-card:hover {
+	border-color: #4A90D9;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(74, 144, 217, 0.15);
+}
+
+.status-card:active {
+	transform: translateY(0);
+}
+
+.status-card.connected {
+	border-color: #2B7A4B;
+}
+
+.status-card.connected:hover {
+	border-color: #0f9b58;
+	box-shadow: 0 4px 12px rgba(15, 155, 88, 0.15);
+}
+
+.status-card.disconnected {
+	border-color: #e74c3c;
+}
+
+.status-card.disconnected:hover {
+	border-color: #ff6b6b;
+	box-shadow: 0 4px 12px rgba(231, 76, 60, 0.15);
+}
+
+.card-icon {
+	font-size: 2rem;
+	line-height: 1;
+	flex-shrink: 0;
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 10px;
+}
+
+.card-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0.35rem;
+}
+
+.card-name {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: #ffffff;
+}
+
+.status-indicator {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.status-indicator.green {
+	background: #0f9b58;
+	box-shadow: 0 0 8px rgba(15, 155, 88, 0.5);
+}
+
+.status-indicator.red {
+	background: #e74c3c;
+	box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+	animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+	0%, 100% { box-shadow: 0 0 8px rgba(231, 76, 60, 0.5); }
+	50% { box-shadow: 0 0 16px rgba(231, 76, 60, 0.8); }
+}
+
+.card-description {
+	font-size: 0.85rem;
+	color: #a0a0b8;
+	line-height: 1.4;
+}
+
+.card-status-text {
+	font-size: 0.75rem;
+	font-weight: 500;
+	margin-top: 0.35rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.card-status-text.pass {
+	color: #0f9b58;
+}
+
+.card-status-text.fail {
+	color: #e74c3c;
+}
+
+/* Fix panel */
+.fix-panel {
+	background: #16213e;
+	border: 1px solid #e74c3c;
+	border-radius: 12px;
+	padding: 1.5rem;
+	margin-bottom: 3rem;
+	animation: slideDown 0.3s ease;
+}
+
+.fix-panel.hidden {
+	display: none;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.fix-panel-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.fix-panel-header h3 {
+	font-size: 1.15rem;
+	font-weight: 600;
+	color: #ff6b6b;
+}
+
+.fix-panel-close {
+	background: none;
+	border: 1px solid #2a3a5c;
+	border-radius: 8px;
+	color: #a0a0b8;
+	font-size: 1.3rem;
+	cursor: pointer;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+}
+
+.fix-panel-close:hover {
+	border-color: #ff6b6b;
+	color: #ff6b6b;
+}
+
+.fix-step {
+	margin-bottom: 0.75rem;
+	padding-left: 1rem;
+	border-left: 2px solid #2a3a5c;
+}
+
+.fix-step-number {
+	font-weight: 600;
+	color: #4A90D9;
+	margin-right: 0.5rem;
+}
+
+.fix-step code {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	background: rgba(255, 255, 255, 0.06);
+	padding: 0.15rem 0.4rem;
+	border-radius: 4px;
+	font-size: 0.85rem;
+	color: #0f9b58;
+}
+
+/* Skills grid */
+.skills-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+	gap: 1rem;
+}
+
+.skill-card {
+	background: #16213e;
+	border: 1px solid #2a3a5c;
+	border-radius: 12px;
+	padding: 1.25rem;
+	transition: all 0.2s ease;
+}
+
+.skill-card:hover {
+	border-color: #4A90D9;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(74, 144, 217, 0.1);
+}
+
+.skill-header {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.skill-icon {
+	font-size: 1.5rem;
+}
+
+.skill-name {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	font-size: 1.05rem;
+	font-weight: 600;
+	color: #0f9b58;
+}
+
+.skill-description {
+	font-size: 0.85rem;
+	color: #a0a0b8;
+	margin-bottom: 0.75rem;
+}
+
+.skill-examples {
+	list-style: none;
+}
+
+.skill-examples li {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	font-size: 0.8rem;
+	color: #7a7a96;
+	padding: 0.3rem 0;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+.skill-examples li:hover {
+	color: #4A90D9;
+}
+
+.skill-examples li::before {
+	content: "$ ";
+	color: #4A90D9;
+	font-weight: 500;
+}
+
+/* Quick reference grid */
+.reference-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 0.75rem;
+}
+
+.ref-card {
+	background: #16213e;
+	border: 1px solid #2a3a5c;
+	border-radius: 10px;
+	padding: 1rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.ref-card:hover {
+	border-color: #4A90D9;
+	transform: translateY(-1px);
+	box-shadow: 0 2px 8px rgba(74, 144, 217, 0.1);
+}
+
+.ref-card:active {
+	transform: translateY(0);
+}
+
+.ref-label {
+	font-size: 0.8rem;
+	color: #a0a0b8;
+	margin-bottom: 0.3rem;
+	font-weight: 500;
+}
+
+.ref-command {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	font-size: 1rem;
+	color: #0f9b58;
+	font-weight: 500;
+}
+
+.ref-note {
+	font-size: 0.75rem;
+	color: #5a5a76;
+	margin-top: 0.25rem;
+	font-style: italic;
+}
+
+/* Toggle buttons for simulating status */
+.toggle-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 1.25rem;
+	padding: 0.75rem 1rem;
+	background: rgba(255, 255, 255, 0.03);
+	border-radius: 10px;
+	border: 1px solid #2a3a5c;
+}
+
+.toggle-bar-label {
+	font-size: 0.85rem;
+	color: #a0a0b8;
+	font-weight: 500;
+	flex-shrink: 0;
+}
+
+.toggle-buttons {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.toggle-btn {
+	background: #1a1a2e;
+	border: 1px solid #2a3a5c;
+	border-radius: 6px;
+	color: #a0a0b8;
+	font-family: 'Inter', sans-serif;
+	font-size: 0.75rem;
+	padding: 0.3rem 0.6rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+	border-color: #4A90D9;
+	color: #e0e0e0;
+}
+
+.toggle-btn.active {
+	background: #0f9b58;
+	border-color: #0f9b58;
+	color: #ffffff;
+}
+
+/* Toast notification */
+.toast {
+	position: fixed;
+	bottom: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #0f9b58;
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border-radius: 8px;
+	font-weight: 500;
+	font-size: 0.95rem;
+	z-index: 1000;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.hidden {
+	opacity: 0;
+	transform: translateX(-50%) translateY(10px);
+	pointer-events: none;
+}
+
+footer {
+	text-align: center;
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 1px solid #2a3a5c;
+	color: #5a5a76;
+	font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+	body { padding: 1rem; }
+	h1 { font-size: 1.8rem; }
+	.status-grid { grid-template-columns: 1fr; }
+	.skills-grid { grid-template-columns: 1fr; }
+	.reference-grid { grid-template-columns: 1fr; }
+}

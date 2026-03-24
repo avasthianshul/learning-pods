@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Terminal Phrasebook — Pod 01</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Terminal Phrasebook</h1>
+		<p class="subtitle">What you want to do → what to type. Click any command to copy it.</p>
+	</header>
+
+	<main>
+		<section class="category" id="navigation">
+			<h2>Getting Around</h2>
+			<div class="phrase-grid">
+				<div class="phrase-card" data-command="ls">
+					<div class="intent">See what's in this folder</div>
+					<div class="command">ls</div>
+					<div class="analogy">Like opening a folder in File Explorer</div>
+				</div>
+				<div class="phrase-card" data-command="cd folder-name">
+					<div class="intent">Go into a folder</div>
+					<div class="command">cd folder-name</div>
+					<div class="analogy">Like double-clicking a folder</div>
+				</div>
+				<div class="phrase-card" data-command="cd ..">
+					<div class="intent">Go back / up one folder</div>
+					<div class="command">cd ..</div>
+					<div class="analogy">Like clicking the back arrow</div>
+				</div>
+				<div class="phrase-card" data-command="pwd">
+					<div class="intent">Where am I right now?</div>
+					<div class="command">pwd</div>
+					<div class="analogy">Like reading the address bar</div>
+				</div>
+				<div class="phrase-card" data-command="cd ~">
+					<div class="intent">Go to my home folder</div>
+					<div class="command">cd ~</div>
+					<div class="analogy">Like clicking "Home" in the sidebar</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="category" id="creating">
+			<h2>Creating Things</h2>
+			<div class="phrase-grid">
+				<div class="phrase-card" data-command="mkdir folder-name">
+					<div class="intent">Create a new folder</div>
+					<div class="command">mkdir folder-name</div>
+					<div class="analogy">Like right-click → New Folder</div>
+				</div>
+				<div class="phrase-card" data-command="mkdir ~/claude_projects">
+					<div class="intent">Create your projects home base</div>
+					<div class="command">mkdir ~/claude_projects</div>
+					<div class="analogy">Your home base for all Claude work</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="category" id="claude-code">
+			<h2>Claude Code</h2>
+			<div class="phrase-grid">
+				<div class="phrase-card highlight" data-command="claude">
+					<div class="intent">Start Claude Code</div>
+					<div class="command">claude</div>
+					<div class="analogy">Opens your AI builder</div>
+				</div>
+				<div class="phrase-card" data-command="/init">
+					<div class="intent">Set up a new project</div>
+					<div class="command">/init</div>
+					<div class="analogy">Creates CLAUDE.md — your project's rulebook</div>
+				</div>
+				<div class="phrase-card" data-command="/resume">
+					<div class="intent">Pick up where I left off</div>
+					<div class="command">/resume</div>
+					<div class="analogy">Continues your last conversation</div>
+				</div>
+				<div class="phrase-card" data-command="/context">
+					<div class="intent">What does Claude see right now?</div>
+					<div class="command">/context</div>
+					<div class="analogy">Shows Claude's current view</div>
+				</div>
+				<div class="phrase-card" data-command="/memory">
+					<div class="intent">What has Claude remembered?</div>
+					<div class="command">/memory</div>
+					<div class="analogy">Shows persistent memories</div>
+				</div>
+				<div class="phrase-card emergency" data-command="Ctrl+C">
+					<div class="intent">STOP what Claude is doing</div>
+					<div class="command">Ctrl+C</div>
+					<div class="analogy">Emergency brake — won't break anything</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="category" id="where-am-i">
+			<h2>Where Am I? — Folder Hierarchy</h2>
+			<div class="hierarchy-diagram">
+				<pre>
+<span class="h-home">~/</span>                          ← Your home folder
+├── <span class="h-desktop">Desktop/</span>                  ← DON'T put projects here
+├── <span class="h-desktop">Downloads/</span>                ← DON'T put projects here
+├── <span class="h-desktop">Documents/</span>                ← DON'T put projects here
+│
+└── <span class="h-projects">claude_projects/</span>          ← YOUR HOME BASE
+    ├── <span class="h-project">my-first-project/</span>     ← One folder per project
+    │   ├── CLAUDE.md             ← Project rulebook
+    │   └── index.html            ← Files Claude creates
+    ├── <span class="h-project">client-dashboard/</span>
+    ├── <span class="h-project">report-generator/</span>
+    └── <span class="h-project">learning_pods/</span>        ← This repo
+				</pre>
+			</div>
+		</section>
+
+		<section class="category" id="productivity">
+			<h2>Productivity Tips</h2>
+			<div class="phrase-grid">
+				<div class="phrase-card tip">
+					<div class="intent">Two-Tab Strategy</div>
+					<div class="command">Open 2 Warp tabs</div>
+					<div class="analogy">Give each tab a different task. Max 2 to start.</div>
+				</div>
+				<div class="phrase-card tip">
+					<div class="intent">Pre-allow safe commands</div>
+					<div class="command">Edit CLAUDE.md</div>
+					<div class="analogy">So Claude doesn't pause for permission on routine tasks</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<div id="toast" class="toast hidden">
+		<span id="toast-text">Copied!</span>
+	</div>
+
+	<footer>
+		<p>Pod 01 — Oren Learning Pods — Claude Code Training Series</p>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>

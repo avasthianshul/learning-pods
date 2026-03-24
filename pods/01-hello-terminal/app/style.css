@@ -1,0 +1,192 @@
+/* Pod 01: Terminal Phrasebook — Dark Theme */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+	background: #1a1a2e;
+	color: #e0e0e0;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	line-height: 1.6;
+	min-height: 100vh;
+	padding: 2rem;
+}
+
+header {
+	text-align: center;
+	margin-bottom: 3rem;
+	padding-bottom: 2rem;
+	border-bottom: 2px solid #2B7A4B;
+}
+
+h1 {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 0.5rem;
+}
+
+.subtitle {
+	font-size: 1.1rem;
+	color: #a0a0b8;
+}
+
+h2 {
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: #4A90D9;
+	margin-bottom: 1rem;
+	padding-left: 0.5rem;
+	border-left: 3px solid #4A90D9;
+}
+
+.category {
+	margin-bottom: 2.5rem;
+}
+
+.phrase-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1rem;
+}
+
+.phrase-card {
+	background: #16213e;
+	border: 1px solid #2a3a5c;
+	border-radius: 12px;
+	padding: 1.25rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	position: relative;
+}
+
+.phrase-card:hover {
+	border-color: #4A90D9;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(74, 144, 217, 0.15);
+}
+
+.phrase-card:active {
+	transform: translateY(0);
+}
+
+.phrase-card.highlight {
+	border-color: #2B7A4B;
+	background: linear-gradient(135deg, #16213e 0%, #1a2e3e 100%);
+}
+
+.phrase-card.highlight:hover {
+	border-color: #0f9b58;
+	box-shadow: 0 4px 12px rgba(15, 155, 88, 0.2);
+}
+
+.phrase-card.emergency {
+	border-color: #e74c3c;
+	background: linear-gradient(135deg, #16213e 0%, #2e1a1a 100%);
+}
+
+.phrase-card.emergency:hover {
+	border-color: #ff6b6b;
+	box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+.phrase-card.tip {
+	border-color: #f39c12;
+	cursor: default;
+}
+
+.phrase-card.tip:hover {
+	border-color: #f1c40f;
+	transform: none;
+	box-shadow: none;
+}
+
+.intent {
+	font-size: 0.9rem;
+	color: #a0a0b8;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+}
+
+.command {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	font-size: 1.2rem;
+	color: #0f9b58;
+	font-weight: 500;
+	margin-bottom: 0.5rem;
+	word-break: break-all;
+}
+
+.emergency .command {
+	color: #ff6b6b;
+}
+
+.tip .command {
+	color: #f39c12;
+	font-family: 'Inter', sans-serif;
+	font-size: 1rem;
+}
+
+.analogy {
+	font-size: 0.8rem;
+	color: #7a7a96;
+	font-style: italic;
+}
+
+/* Hierarchy diagram */
+.hierarchy-diagram {
+	background: #16213e;
+	border: 1px solid #2a3a5c;
+	border-radius: 12px;
+	padding: 1.5rem 2rem;
+	overflow-x: auto;
+}
+
+.hierarchy-diagram pre {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	font-size: 0.95rem;
+	line-height: 1.8;
+	color: #e0e0e0;
+	white-space: pre;
+}
+
+.h-home { color: #4A90D9; font-weight: 600; }
+.h-desktop { color: #e74c3c; }
+.h-projects { color: #0f9b58; font-weight: 700; }
+.h-project { color: #2B7A4B; }
+
+/* Toast notification */
+.toast {
+	position: fixed;
+	bottom: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #0f9b58;
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border-radius: 8px;
+	font-weight: 500;
+	font-size: 0.95rem;
+	z-index: 1000;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.hidden {
+	opacity: 0;
+	transform: translateX(-50%) translateY(10px);
+	pointer-events: none;
+}
+
+footer {
+	text-align: center;
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 1px solid #2a3a5c;
+	color: #5a5a76;
+	font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+	body { padding: 1rem; }
+	h1 { font-size: 1.8rem; }
+	.phrase-grid { grid-template-columns: 1fr; }
+}

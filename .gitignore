@@ -1,0 +1,38 @@
+# Auth / Secrets
+oren-auth/
+auth/
+*.env
+!*.env.example
+*.key
+*.pem
+*.secret
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node
+node_modules/
+.next/
+.vercel/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Generated (keep pptx in git since team needs them)
+# *.pptx
+
+# Temp
+/tmp/
+*.tmp
+*.log

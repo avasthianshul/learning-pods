@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Connection Dashboard — Pod 02</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Connection Dashboard</h1>
+		<p class="subtitle">Your tool connections at a glance. Click any card to see details.</p>
+		<div class="status-summary" id="status-summary">
+			<span class="summary-count" id="connected-count">0</span> / <span id="total-count">6</span> connected
+		</div>
+	</header>
+
+	<main>
+		<section class="section" id="connections-section">
+			<h2>Tool Connections</h2>
+			<div class="status-grid" id="status-grid"></div>
+		</section>
+
+		<div id="fix-panel" class="fix-panel hidden">
+			<div class="fix-panel-header">
+				<h3 id="fix-panel-title">How to Fix</h3>
+				<button class="fix-panel-close" id="fix-panel-close" aria-label="Close">&times;</button>
+			</div>
+			<div id="fix-panel-body"></div>
+		</div>
+
+		<section class="section" id="skills-section">
+			<h2>Available Skills</h2>
+			<p class="section-intro">Skills are instruction cards that teach Claude how to use each tool. Invoke them with a slash command.</p>
+			<div class="skills-grid" id="skills-grid"></div>
+		</section>
+
+		<section class="section" id="reference-section">
+			<h2>Quick Reference</h2>
+			<p class="section-intro">Common commands you'll use every day. Click any command to copy it.</p>
+			<div class="reference-grid" id="reference-grid"></div>
+		</section>
+	</main>
+
+	<div id="toast" class="toast hidden">
+		<span id="toast-text">Copied!</span>
+	</div>
+
+	<footer>
+		<p>Pod 02 — Oren Learning Pods — Claude Code Training Series</p>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
