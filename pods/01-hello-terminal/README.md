@@ -8,6 +8,43 @@
 
 ---
 
+## Why Are We Here?
+
+### Claude Code changes what's possible for you
+
+Over the next 13 weeks, you're going to learn a tool that lets you **build things you'd normally need a developer for** — dashboards, automations, reports, internal tools, live websites — all by describing what you want in plain English.
+
+That tool is **Claude Code**. Here's what it can do:
+
+- "Analyze this CSV and build me a chart of our top 10 emitters" → **Done in 2 minutes**
+- "Create a client-facing dashboard with our pipeline data" → **Done in 15 minutes, deployed to a live URL**
+- "Read my Google Drive folder, summarize each document, and post the summaries to Slack" → **Done in 5 minutes**
+- "Build me a landing page for our new service offering" → **Done in 10 minutes, live on the internet**
+
+You don't write code. You don't learn a programming language. You **describe what you want**, and Claude builds it. If you can write a clear email, you can use Claude Code.
+
+### What does "full-stack confident" mean?
+
+By the end of this series, you'll be able to go from an idea to a working, deployed tool — start to finish — without needing help from engineering. That's what full-stack confident means. Not "I can write code." It means "I can build and ship things."
+
+---
+
+## Why the Terminal? Why File Organization?
+
+### The terminal is the gateway
+
+Claude Code lives in the terminal. There's no way around it — and there's a good reason. The terminal gives Claude direct access to your files, your tools, and the internet. A chat window can only talk. A terminal can **do**.
+
+The good news: you only need about 5 commands. That's fewer than Excel keyboard shortcuts.
+
+### File organization is the foundation
+
+The single biggest frustration people have with Claude Code is: "Claude can't find my files" or "Claude made changes in the wrong folder." This happens when your files are scattered across Desktop, Downloads, and random folders.
+
+We fix that today by setting up one clean home base: `~/claude_projects/`. Every project gets its own folder. Claude always knows where to look. You always know where your work lives.
+
+---
+
 ## What You'll Learn Today
 
 By the end of this session, you will:
