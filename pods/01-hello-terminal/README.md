@@ -46,15 +46,15 @@ You already have it installed (or we'll install it now). Open it up.
 
 Here's the Rosetta Stone — what you'd do with your mouse, but typed instead:
 
-| What you want to do | In File Explorer / Finder | In the terminal |
-|---------------------|---------------------------|-----------------|
-| See what's in this folder | Open the folder | `ls` |
-| Go into a folder | Double-click it | `cd folder-name` |
-| Where am I right now? | Look at the address bar | `pwd` |
-| Create a new folder | Right-click → New Folder | `mkdir folder-name` |
-| Go up one folder | Click the back arrow | `cd ..` |
+| What you want to do | In File Explorer / Finder | In the terminal | What it stands for |
+|---------------------|---------------------------|-----------------|-------------------|
+| See what's in this folder | Open the folder | `ls` | **l**i**s**t |
+| Go into a folder | Double-click it | `cd folder-name` | **c**hange **d**irectory |
+| Where am I right now? | Look at the address bar | `pwd` | **p**rint **w**orking **d**irectory |
+| Create a new folder | Right-click → New Folder | `mkdir folder-name` | **m**a**k**e **dir**ectory |
+| Go up one folder | Click the back arrow | `cd ..` | **c**hange **d**irectory to parent |
 
-That's all you need to know for today. Five commands.
+That's all you need to know for today. Five commands. Once you know what they stand for, they're easy to remember.
 
 ---
 

@@ -126,6 +126,17 @@ h2 {
 	font-size: 1rem;
 }
 
+.stands-for {
+	font-size: 0.8rem;
+	color: #4A90D9;
+	margin-bottom: 0.25rem;
+}
+
+.stands-for strong {
+	color: #6ab0ff;
+	font-weight: 600;
+}
+
 .analogy {
 	font-size: 0.8rem;
 	color: #7a7a96;
