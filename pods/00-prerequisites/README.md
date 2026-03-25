@@ -22,7 +22,10 @@ Before you begin, make sure you have:
 
 ### What is GitHub?
 
-GitHub is like Google Drive, but for code. It's where all the course materials live, and it's where your projects will be saved so you never lose your work.
+- **Think of it like Google Drive, but for code** — it's where all course materials live and where your projects get saved
+- **It remembers every version, forever** — unlike Word which overwrites your file each time you save, GitHub keeps the full history so you can always roll back if something breaks
+- **It handles teamwork automatically** — if two people edit different parts of the same project, GitHub merges the changes without them overwriting each other
+- **You don't need to touch it directly** — Claude Code manages all of this for you; you just need an account so your work saves to the right place
 
 ### How to Create Your Account
 
@@ -31,8 +34,7 @@ GitHub is like Google Drive, but for code. It's where all the course materials l
 3. Use your **@orennow.com email address**
 4. Pick a username — suggestion: your first name or `firstname-oren` (e.g., `priya-oren`)
 5. Create a password and **write it down somewhere safe**
-6. Complete the verification steps (usually a simple puzzle)
-7. Check your @orennow.com email for a verification link and click it
+6. Complete the verification steps (a simple puzzle, then click the link in your @orennow.com email)
 
 GitHub is completely free. You do not need a paid plan.
 
@@ -40,152 +42,75 @@ GitHub is completely free. You do not need a paid plan.
 
 ---
 
-## Step 2: Install Claude Code
+## Step 2: Install Warp Terminal
 
-### Pick Your Path
+### What is Warp?
 
-There are three ways to install Claude Code. Pick the one that feels right for you:
+- **Your terminal for the entire course** — a text box where you type instructions to your computer
+- Free, works on Mac and Windows, and much friendlier than the default terminal
 
-| Path | Best for | Time | What you get |
-|------|----------|------|-------------|
-| **Path A: Desktop App** | Fastest setup | 5 min | Claude in a window — like a chat app |
-| **Path B: Terminal** | Best performance | 15 min | Claude in the terminal — the full power version |
-| **Path C: Desktop + Terminal** | Best of both worlds (RECOMMENDED) | 10 min | Start with the app, it installs terminal for you |
+### Install Warp
 
----
-
-## Path A: Claude Desktop App (Fastest)
-
-### Steps
-
-1. Go to **claude.ai/download** in your browser
-2. Click **Download** for your operating system (Windows or Mac)
-3. Open the downloaded file and install it (follow the prompts)
-4. Open the Claude Desktop app
-5. Sign in with your Claude account
-
-That's it. You now have Claude in a desktop window.
-
-**If you chose Path A, skip ahead to the "You're Ready" section below.**
+1. Go to **warp.dev** and click **Download**
+2. Open the downloaded file and follow the install prompts
+3. Open **Warp** — you should see a dark window with a text box at the bottom
+4. **Windows only:** click the dropdown next to the **+** tab, select **Git Bash**, then go to **Settings → Features → Session** and set Startup shell to Git Bash
 
 ---
 
-## Path C: Desktop App + Terminal (Recommended)
+## Step 3: Pick Your Starting Point
 
-This is the best option — you get the friendly desktop app AND the powerful terminal version.
-
-### Steps
-
-1. Install the Claude Desktop App (follow Path A above — steps 1 through 5)
-2. Open the Claude Desktop app
-3. Look for the **Terminal** or **Code** tab in the app
-4. Click it — it will install Claude Code on your terminal automatically
-5. Follow any prompts it shows you
-
-When it's done, you have both versions. You can use whichever feels more comfortable.
-
-**Skip ahead to the "You're Ready" section below.**
+| Situation | Path |
+|-----------|------|
+| I can type `claude` in Warp and it works | Path 1 — Done! |
+| I have Claude Desktop but not Claude Code in terminal | Path 2 — 5 min |
+| I don't have either | Path 3 — 10 min |
 
 ---
 
-## Path B: Terminal-First (10 Steps)
+## Path 1: Already Have Claude Code
 
-This path gives you the full terminal experience. It takes longer to set up but gives you the best performance.
+### Launch It
 
-**If you chose Path A or C, skip this entire section.**
-
-### Step B1: Download Warp
-
-Warp is a modern terminal — think of it as a text box for talking to your computer, but with a friendlier design than the default terminal.
-
-1. Go to **warp.dev** in your browser
-2. Click **Download**
-3. Open the downloaded file and install it
-
-### Step B2: Open Warp
-
-Open the Warp app. You'll see a text box with a blinking cursor. That's your terminal. Don't worry — it's just a text box where you type instructions.
-
-### Step B3: Windows Users Only — Switch to Git Bash
-
-**Mac users: skip this step.**
-
-Windows users need to switch Warp's shell so that the commands work the same as on Mac:
-
-1. Look at the top of Warp — next to the **+** tab button, there's a small dropdown
-2. Click it and select **Git Bash**
-3. To make this permanent: go to **Settings → Features → Session** and set **Startup shell** to Git Bash
-
-If you don't see Git Bash as an option, you'll need to install Git for Windows first — go to **git-scm.com**, download, and install with all default options. Then restart Warp.
-
-### Step B4: Watch the Install Video (Optional)
-
-[VIDEO LINK — 5-minute walkthrough of Claude Code terminal installation]
-
-If you prefer reading, follow steps B5–B8 below.
-
-### Step B5: Check If Node.js Is Installed
-
-Type this in Warp and press Enter:
-
-```
-node --version
-```
-
-If you see a version number (like `v20.11.0`), you're good — skip to Step B7.
-
-If you see an error like "command not found", go to Step B6.
-
-### Step B6: Install Node.js
-
-1. Go to **nodejs.org** in your browser
-2. Download the **LTS** version (the big green button)
-3. Open the downloaded file and install it (click Next through everything)
-4. **Close Warp completely and reopen it**
-5. Try `node --version` again — you should see a version number now
-
-### Step B7: Install Claude Code
-
-Type this in Warp and press Enter:
-
-```
-npm install -g @anthropic-ai/claude-code
-```
-
-Wait for it to finish. You'll see a progress bar and then a success message.
-
-### Step B8: Start Claude Code
-
-Type this in Warp and press Enter:
-
-```
-claude
-```
-
-Claude Code will start up and ask you to sign in. Follow the prompts — it will open your browser for authentication.
+- Open **Warp**, type `claude`, press **Enter** — you should see a welcome message
+- If it asks you to sign in, follow the prompts — it opens your browser
 
 ---
 
-## You're Ready!
+## Path 2: Have Claude Desktop, Need Terminal
 
-### How to Know It Worked
+### Copy This Prompt into the Claude Code Tab
 
-You're set up if **either** of these is true:
+```
+I need you to install Claude Code so I can use it in my terminal. Please detect my operating system, install everything that is needed (including Node.js if missing), and walk me through each step one at a time. After each step, wait for me to confirm before moving on.
+```
 
-- **Desktop app:** You can open Claude Desktop and chat with Claude
-- **Terminal:** You can type `claude` in Warp and it starts up
+- In **Claude Desktop**, click the **Claude Code** tab (not the regular chat tab) and paste the prompt above
+- Follow each step Claude gives you — if anything fails, paste the error back and ask Claude to help
+- When done: open **Warp**, type `claude`, press **Enter** — you should see a welcome message
 
-### Troubleshooting
+---
 
-| Problem | Solution |
-|---------|----------|
-| `npm: command not found` | Install Node.js first (Step B6), then close and reopen Warp |
-| `Permission denied` on Mac | Add `sudo` in front: `sudo npm install -g @anthropic-ai/claude-code` — enter your computer password when asked |
-| `Permission denied` on Windows | Close Warp, right-click it, choose **Run as Administrator**, then try again |
-| `claude: command not found` | Close Warp completely and reopen it, then try `claude` again |
-| Can't sign in | Make sure you have an active Claude Pro or Max subscription at claude.ai |
-| Git Bash not showing in Warp | Install Git for Windows from git-scm.com, then restart Warp |
+## Path 3: Starting from Scratch
+
+### Install Claude Desktop, Then Follow Path 2
+
+1. Go to **claude.ai/download** and click **Download** for your OS
+2. Install it, open the app, and sign in with your Claude Pro or Max account
+3. Now scroll back up and follow **Path 2** above
+
+---
+
+## Troubleshooting
+
+| Problem | What to do |
+|---------|------------|
+| `claude: command not found` | Close Warp completely, reopen it, try again |
+| `npm: command not found` or `Permission denied` | Paste the exact error into Claude Desktop and ask what to do |
+| Can't sign in to Claude | Make sure you have an active Pro or Max subscription at claude.ai |
+| Warp not installed | Download free from **warp.dev** |
+| Tried everything, still stuck | Screenshot the error and message **#learning-pods** on Slack |
 
 ### What's Next?
 
-Come to **Pod 01: Hello, Terminal** with this setup done. We'll take it from there — no other preparation needed. If you get stuck on any step, message **#learning-pods** on Slack and someone will help you.
+- Come to **Pod 01: Hello, Terminal** with this setup done — if you get stuck, message **#learning-pods** on Slack
