@@ -1,19 +1,16 @@
-// Pod 01: Terminal Phrasebook — Click to copy
+// Pod 01: Interactive Lecture Notes — Click to copy
 
 document.addEventListener("DOMContentLoaded", () => {
-	const cards = document.querySelectorAll(".phrase-card[data-command]");
+	const cards = document.querySelectorAll(".phrase-card[data-command], .step-card[data-command]");
 	const toast = document.getElementById("toast");
 	const toastText = document.getElementById("toast-text");
 	let toastTimeout;
 
 	cards.forEach((card) => {
-		// Skip tip cards (no copy action)
-		if (card.classList.contains("tip")) return;
-
 		card.addEventListener("click", () => {
 			const command = card.getAttribute("data-command");
 			copyToClipboard(command);
-			showToast(`Copied: ${command}`);
+			showToast(`Copied: ${command.length > 50 ? command.substring(0, 50) + "..." : command}`);
 		});
 	});
 

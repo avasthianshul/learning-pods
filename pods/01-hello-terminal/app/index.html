@@ -3,19 +3,28 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Terminal Phrasebook — Pod 01</title>
+	<title>Pod 01: Hello, Terminal — Lecture Notes</title>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<header>
-		<h1>Terminal Phrasebook</h1>
-		<p class="subtitle">What you want to do → what to type. Click any command to copy it.</p>
+		<h1>Pod 01: Hello, Terminal</h1>
+		<p class="subtitle">Interactive lecture notes — click any command to copy it</p>
 	</header>
 
+	<nav class="section-nav">
+		<a href="#terminal-basics">Terminal Basics</a>
+		<a href="#folder-map">Folder Map</a>
+		<a href="#claude-code">Claude Code</a>
+		<a href="#why-git">Why Git?</a>
+		<a href="#github">GitHub Setup</a>
+		<a href="#clone">Clone & Explore</a>
+	</nav>
+
 	<main>
-		<section class="category" id="navigation">
-			<h2>Getting Around</h2>
+		<section class="category" id="terminal-basics">
+			<h2>Terminal Basics — 5 Commands</h2>
 			<div class="phrase-grid">
 				<div class="phrase-card" data-command="ls">
 					<div class="intent">See what's in this folder</div>
@@ -41,6 +50,12 @@
 					<div class="stands-for"><strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory</div>
 					<div class="analogy">Like reading the address bar</div>
 				</div>
+				<div class="phrase-card" data-command="mkdir folder-name">
+					<div class="intent">Create a new folder</div>
+					<div class="command">mkdir folder-name</div>
+					<div class="stands-for"><strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory</div>
+					<div class="analogy">Like right-click → New Folder</div>
+				</div>
 				<div class="phrase-card" data-command="cd ~">
 					<div class="intent">Go to my home folder</div>
 					<div class="command">cd ~</div>
@@ -50,62 +65,8 @@
 			</div>
 		</section>
 
-		<section class="category" id="creating">
-			<h2>Creating Things</h2>
-			<div class="phrase-grid">
-				<div class="phrase-card" data-command="mkdir folder-name">
-					<div class="intent">Create a new folder</div>
-					<div class="command">mkdir folder-name</div>
-					<div class="stands-for"><strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory</div>
-					<div class="analogy">Like right-click → New Folder</div>
-				</div>
-				<div class="phrase-card" data-command="mkdir ~/claude_projects">
-					<div class="intent">Create your projects home base</div>
-					<div class="command">mkdir ~/claude_projects</div>
-					<div class="stands-for"><strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory at your home base</div>
-					<div class="analogy">Your home base for all Claude work</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="category" id="claude-code">
-			<h2>Claude Code</h2>
-			<div class="phrase-grid">
-				<div class="phrase-card highlight" data-command="claude">
-					<div class="intent">Start Claude Code</div>
-					<div class="command">claude</div>
-					<div class="analogy">Opens your AI builder</div>
-				</div>
-				<div class="phrase-card" data-command="/init">
-					<div class="intent">Set up a new project</div>
-					<div class="command">/init</div>
-					<div class="analogy">Creates CLAUDE.md — your project's rulebook</div>
-				</div>
-				<div class="phrase-card" data-command="/resume">
-					<div class="intent">Pick up where I left off</div>
-					<div class="command">/resume</div>
-					<div class="analogy">Continues your last conversation</div>
-				</div>
-				<div class="phrase-card" data-command="/context">
-					<div class="intent">What does Claude see right now?</div>
-					<div class="command">/context</div>
-					<div class="analogy">Shows Claude's current view</div>
-				</div>
-				<div class="phrase-card" data-command="/memory">
-					<div class="intent">What has Claude remembered?</div>
-					<div class="command">/memory</div>
-					<div class="analogy">Shows persistent memories</div>
-				</div>
-				<div class="phrase-card emergency" data-command="Ctrl+C">
-					<div class="intent">STOP what Claude is doing</div>
-					<div class="command">Ctrl+C</div>
-					<div class="analogy">Emergency brake — won't break anything</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="category" id="where-am-i">
-			<h2>Where Am I? — Folder Hierarchy</h2>
+		<section class="category" id="folder-map">
+			<h2>Folder Map — Your Home Base</h2>
 			<div class="hierarchy-diagram">
 				<pre>
 <span class="h-home">~/</span>                          ← Your home folder
@@ -114,29 +75,116 @@
 ├── <span class="h-desktop">Documents/</span>                ← DON'T put projects here
 │
 └── <span class="h-projects">claude_projects/</span>          ← YOUR HOME BASE
-    ├── <span class="h-project">my-first-project/</span>     ← One folder per project
-    │   ├── CLAUDE.md             ← Project rulebook
+    ├── <span class="h-project">my-first-project/</span>     ← Your first project today
     │   └── index.html            ← Files Claude creates
     ├── <span class="h-project">client-dashboard/</span>
     ├── <span class="h-project">report-generator/</span>
-    └── <span class="h-project">learning_pods/</span>        ← This repo
+    └── <span class="h-project">learning_pods/</span>        ← Course materials (cloned from GitHub)
 				</pre>
 			</div>
 		</section>
 
-		<section class="category" id="productivity">
-			<h2>Productivity Tips</h2>
+		<section class="category" id="claude-code">
+			<h2>Claude Code — Your AI Builder</h2>
 			<div class="phrase-grid">
-				<div class="phrase-card tip">
-					<div class="intent">Two-Tab Strategy</div>
-					<div class="command">Open 2 Warp tabs</div>
-					<div class="analogy">Give each tab a different task. Max 2 to start.</div>
+				<div class="phrase-card highlight" data-command="claude">
+					<div class="intent">Start Claude Code</div>
+					<div class="command">claude</div>
+					<div class="analogy">Opens your AI builder in the current folder</div>
 				</div>
-				<div class="phrase-card tip">
-					<div class="intent">Pre-allow safe commands</div>
-					<div class="command">Edit CLAUDE.md</div>
-					<div class="analogy">So Claude doesn't pause for permission on routine tasks</div>
+				<div class="phrase-card emergency" data-command="Ctrl+C">
+					<div class="intent">STOP what Claude is doing</div>
+					<div class="command">Ctrl+C</div>
+					<div class="analogy">Emergency brake — won't break anything, use freely</div>
 				</div>
+				<div class="phrase-card example" data-command='Create an HTML page that says Hello World with a dark background and today&apos;s date'>
+					<div class="intent">Example first prompt</div>
+					<div class="command">"Create an HTML page that says Hello World with a dark background and today's date"</div>
+					<div class="analogy">Describe what you want in plain English — Claude builds it</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="category" id="why-git">
+			<h2>Why Git & GitHub?</h2>
+			<p class="section-intro">Google Drive = documents, presentations, resources. GitHub = dashboards, tools, automations — anything that evolves.</p>
+			<div class="concept-grid">
+				<div class="concept-card">
+					<div class="concept-label">Remote</div>
+					<div class="concept-desc">Your project on GitHub (online copy)</div>
+				</div>
+				<div class="concept-card">
+					<div class="concept-label">Local</div>
+					<div class="concept-desc">Your project on your computer (downloaded copy)</div>
+				</div>
+				<div class="concept-card">
+					<div class="concept-label">Push</div>
+					<div class="concept-desc">Upload your changes to GitHub</div>
+				</div>
+				<div class="concept-card">
+					<div class="concept-label">Pull</div>
+					<div class="concept-desc">Download latest changes from GitHub</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="category" id="github">
+			<h2>GitHub Setup — 3 Steps</h2>
+			<p class="section-intro">Once connected, your work is saved, shareable, and version-tracked.</p>
+			<div class="step-grid">
+				<div class="step-card" data-command="Install the GitHub command-line tool for me">
+					<div class="step-number">1</div>
+					<div class="step-content">
+						<div class="intent">Ask Claude to install GitHub CLI</div>
+						<div class="command">"Install the GitHub command-line tool for me"</div>
+						<div class="analogy">Type this inside Claude Code — Claude handles Mac vs Windows for you</div>
+					</div>
+				</div>
+				<div class="step-card" data-command="gh auth login">
+					<div class="step-number">2</div>
+					<div class="step-content">
+						<div class="intent">Log in to GitHub (in Warp, not Claude)</div>
+						<div class="command">gh auth login</div>
+						<div class="analogy">Open a new Warp tab → type this → follow browser prompts → come back to Claude</div>
+					</div>
+				</div>
+				<div class="step-card" data-command="Check if GitHub is connected">
+					<div class="step-number">3</div>
+					<div class="step-content">
+						<div class="intent">Verify it worked</div>
+						<div class="command">"Check if GitHub is connected"</div>
+						<div class="analogy">Back in Claude Code — Claude runs gh auth status to confirm</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="category" id="clone">
+			<h2>Clone & Explore</h2>
+			<div class="phrase-grid">
+				<div class="phrase-card highlight" data-command="Clone the learning pods repository from GitHub to my claude_projects folder">
+					<div class="intent">Get the course materials</div>
+					<div class="command">"Clone the learning pods repository from GitHub to my claude_projects folder"</div>
+					<div class="analogy">Tell Claude Code this — it downloads the entire course to your computer</div>
+				</div>
+				<div class="phrase-card" data-command="cd ~/claude_projects/learning_pods">
+					<div class="intent">Go to the course folder</div>
+					<div class="command">cd ~/claude_projects/learning_pods</div>
+					<div class="analogy">Navigate into the cloned repo</div>
+				</div>
+			</div>
+			<div class="hierarchy-diagram" style="margin-top: 1rem;">
+				<pre>
+<span class="h-projects">learning_pods/</span>
+├── pods/
+│   ├── <span class="h-project">00-prerequisites/</span>     ← Setup guide (what you did before today)
+│   ├── <span class="h-project">01-hello-terminal/</span>    ← Today's lecture + this app
+│   ├── <span class="h-project">02-fire-and-forget/</span>   ← Next week
+│   └── ...                       ← 13 pods total
+├── shared/                       ← Themes, generators
+├── setup/                        ← One-time setup scripts
+└── skills/                       ← Claude's instruction cards for tools
+				</pre>
 			</div>
 		</section>
 	</main>
@@ -146,7 +194,7 @@
 	</div>
 
 	<footer>
-		<p>Pod 01 — Oren Learning Pods — Claude Code Training Series</p>
+		<p>Pod 01: Hello, Terminal — Oren Learning Pods</p>
 	</footer>
 
 	<script src="script.js"></script>

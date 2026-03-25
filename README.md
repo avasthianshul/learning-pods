@@ -4,12 +4,8 @@ A 13-week hands-on training series to take the Oren team from terminal beginners
 
 ## Quick Start
 
-1. **Install Warp terminal** — [warp.dev](https://www.warp.dev/) (Windows + Mac)
-2. **Clone this repo:**
-   ```bash
-   git clone <repo-url> ~/claude_projects/learning_pods
-   cd ~/claude_projects/learning_pods
-   ```
+1. **Complete the prerequisites** — see [Pod 00: Prerequisites](pods/00-prerequisites/) for setup instructions
+2. **Come to Pod 01** — we'll clone this repo together and get you building
 3. **Run setup** (Week 2 — we'll do this together):
    - Windows: `powershell setup/install-windows.ps1`
    - Mac: `bash setup/install-mac.sh`
@@ -17,10 +13,15 @@ A 13-week hands-on training series to take the Oren team from terminal beginners
 
 ## Schedule (Q2 2026)
 
+### Pre-work
+| Week | Date | Pod | Topic |
+|------|------|-----|-------|
+| — | Before Apr 6 | [Prerequisites](pods/00-prerequisites/) | GitHub account, Claude Code installation (self-serve deck via Slack) |
+
 ### Basics & Claude Code
 | Week | Date | Pod | Topic |
 |------|------|-----|-------|
-| 1 | Apr 6 | [Hello, Terminal](pods/01-hello-terminal/) | File system, terminal, first Claude Code prompt, folder hierarchy |
+| 1 | Apr 6 | [Hello, Terminal](pods/01-hello-terminal/) | Terminal basics, first project, GitHub connection, clone repo |
 | 2 | Apr 13 | [Fire and Forget](pods/02-fire-and-forget/) | Setup all tools + Claude Code mastery: skills, CLAUDE.md, plan mode, model selection |
 | 3 | Apr 20 | [The Data Whisperer](pods/03-data-whisperer/) | CSV analysis with Claude Code, hooks, multitasking, agents |
 
@@ -67,10 +68,9 @@ A 13-week hands-on training series to take the Oren team from terminal beginners
 ## What You Need
 
 - A computer (Windows or Mac)
-- [Warp terminal](https://www.warp.dev/) installed
 - A Claude Pro or Max subscription
-- A GitHub account (free)
 - Willingness to type things into a terminal (we promise it's not scary)
+- **Complete [Pod 00: Prerequisites](pods/00-prerequisites/)** before the first session — it walks you through GitHub signup and Claude Code installation
 
 ## Folder Structure
 
