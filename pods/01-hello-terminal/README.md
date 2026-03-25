@@ -85,6 +85,22 @@ Starting today, all your Claude Code projects go in one place:
 
 **Why not Desktop or Downloads?** Those folders get messy fast, things get synced to the cloud unexpectedly, and Claude can't find your files. One home base, one folder per project, clean and findable.
 
+### Why This Structure Matters for AI
+
+- Claude reads your project folder to understand what you're building
+- One folder = one project = one clear briefing for Claude
+- Scattered files on your Desktop = Claude guessing what belongs together
+- Clean structure → faster, more accurate results every time
+- Coming in Pod 02: a CLAUDE.md file in each project — a note that tells Claude the rules and context for that project
+
+### Your Folder is Claude's Context
+
+- When you type `claude` inside a folder, Claude scans everything inside it
+- It sees your files, your work-in-progress, and any instructions you've left
+- `~/claude_projects/client-dashboard/` tells Claude: these files are one project, work here
+- A well-named, well-organized folder = a well-briefed AI assistant
+- Think of it like handing a consultant a labeled binder vs. a pile of loose pages on a desk
+
 ---
 
 ## Your First Project
@@ -174,22 +190,30 @@ Claude will figure out your operating system and run the right command — `brew
 
 If Claude asks for permission to run a command, say yes.
 
-### Step 2: Log In to GitHub (The One Time You Leave Claude)
+### What is SSH? (In Plain English)
 
-This is the only step where you need to type something directly in Warp instead of through Claude:
+- SSH is how your computer and GitHub recognize each other — no password needed every time
+- You create a matched pair: a **public key** (like a padlock you hand to GitHub) and a **private key** (like the key only your computer has)
+- When your computer talks to GitHub, they check the lock and key — if they match, you're in
+- You set this up once. After that, everything works automatically in the background.
+- The good news: `gh auth login` handles the hard part — it generates the keys and uploads them for you
 
-1. Open a **new Warp tab** (don't close your Claude session!)
-2. Type this and press Enter:
-   ```
-   gh auth login
-   ```
-3. You'll see a series of choices. Pick:
+### Step 2: Log In to GitHub via SSH (In Warp)
+
+This is the one moment you step out of Claude and type directly in Warp:
+
+1. Open a **new Warp tab** — keep your Claude session open, don't close it
+2. Type `gh auth login` and press Enter
+3. Use your arrow keys to pick each option and press Enter after each:
    - **GitHub.com** (not Enterprise)
-   - **HTTPS**
-   - **Yes** — authenticate Git with GitHub credentials
+   - **SSH** (not HTTPS)
+   - **Yes** — generate a new SSH key
+   - Enter a name for your key, e.g. `my-laptop`, then press Enter
+   - **Passphrase** — press Enter to leave it blank
    - **Login with a web browser**
-4. It shows you a code and opens your browser — paste the code, click Authorize
-5. Done! Close this Warp tab and go back to your Claude Code tab
+4. A one-time code appears on screen — copy it, then press Enter to open your browser
+5. On GitHub, paste the code and click **Authorize GitHub CLI**
+6. Close this Warp tab and return to your Claude Code session
 
 ### Step 3: Verify It Worked
 
@@ -205,17 +229,18 @@ Claude will run `gh auth status` and confirm you're logged in. If you see your u
 
 ### Get the Course Materials on Your Machine
 
-In your Claude Code session, type:
+1. Go to your Claude Code session (or open Claude Desktop)
+2. Type exactly: **"Clone the learning pods repository from GitHub to my claude_projects folder. The repo URL is https://github.com/avasthianshul/learning-pods.git"**
+3. Claude will run the clone command — say yes to any permission prompts
+4. Once complete, type: **"Open the learning_pods folder"**
+5. You now have every pod's lecture notes, exercises, and browser apps on your computer
 
-> Clone the learning pods repository from GitHub to my claude_projects folder. The repo URL is https://github.com/avasthianshul/learning-pods.git
+### What Was Just Downloaded?
 
-Claude will run the clone command and download all the course materials.
-
-Then tell Claude:
-
-> Open the learning_pods folder
-
-You now have every pod's lecture notes, exercises, and apps on your computer.
+- **pods/** — one folder per week, containing lecture notes, exercises, and a browser app
+- **shared/** — templates, the theme, and the PPTX generator used to make these slides
+- **skills/** — automation tools you'll unlock in later pods
+- Every pod's browser app is ready to open — no installation needed
 
 ---
 
@@ -232,6 +257,13 @@ Open this file in your browser:
 ```
 
 You'll see today's lecture notes organized into sections with click-to-copy commands and visual diagrams. **Bookmark this page.** It's your go-to reference when you forget a command.
+
+### Proof of Completion
+
+- If the app opens in your browser: your entire environment is working
+- It means Warp is installed, GitHub CLI is ready, SSH is configured, and the repo is cloned
+- Screenshot this page or show it to a facilitator — this is your proof you completed Pod 01 setup
+- **You just set up a professional developer environment. Without writing a single line of code.**
 
 ---
 
