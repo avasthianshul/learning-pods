@@ -5,103 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Claude Code Adoption — Oren</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/theme.css">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: #0f0f1a;
-      color: #a1a1aa;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .container { max-width: 960px; margin: 0 auto; padding: 3rem 1.5rem; }
-
-    /* — Epigraph — */
-    .epigraph {
-      text-align: center;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .epigraph q {
-      font-size: 0.8rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #52525b;
-      font-style: normal;
-    }
-
-    /* — Header — */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 2rem;
-    }
-    .header h1 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #fafafa;
-      letter-spacing: -0.01em;
-    }
-    .header .meta {
-      font-size: 0.75rem;
-      color: #52525b;
-      margin-top: 0.25rem;
-    }
-    .refresh-btn {
-      background: transparent;
-      color: #71717a;
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 0.4rem 0.85rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.75rem;
-      font-weight: 500;
-      transition: all 0.15s ease;
-    }
-    .refresh-btn:hover { color: #fafafa; border-color: rgba(255,255,255,0.15); }
-    .refresh-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-    /* — Summary cards — */
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-    .card {
-      background: #13131f;
-      padding: 1.25rem 1.5rem;
-    }
-    .card .label {
-      font-size: 0.65rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #52525b;
-      margin-bottom: 0.5rem;
-    }
-    .card .value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #fafafa;
-      letter-spacing: -0.02em;
-    }
-    .card .detail {
-      font-size: 0.7rem;
-      color: #4A90D9;
-      margin-top: 0.2rem;
-    }
-
-    /* — Table — */
+    /* — Table (page-specific) — */
     .table-wrap {
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 10px;
@@ -163,41 +69,25 @@
     .metric-sessions { font-size: 0.7rem; color: #3d7abd; margin-top: 0.1rem; }
     .metric-zero .metric-cost { color: #3f3f46; font-weight: 400; }
 
-    /* — States — */
-    .state-msg {
-      text-align: center;
-      padding: 3rem 1rem;
+    .metric-setup { font-weight: 600; font-size: 0.9rem; }
+    .setup-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      margin-top: 0.4rem;
+      overflow: hidden;
     }
-    .state-msg.loading { color: #52525b; }
-    .state-msg.error { color: #ef4444; }
-    .state-msg.empty { color: #3f3f46; }
-    .state-msg p { font-size: 0.8rem; margin-top: 0.5rem; }
-
-    .spinner {
-      width: 18px; height: 18px;
-      border: 2px solid rgba(255,255,255,0.06);
-      border-top-color: #4A90D9;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      margin: 0 auto 0.75rem;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .footer {
-      text-align: center;
-      font-size: 0.65rem;
-      color: #27272a;
-      margin-top: 2rem;
-      letter-spacing: 0.02em;
-    }
-
-    @media (max-width: 640px) {
-      .summary { grid-template-columns: 1fr; }
-      .container { padding: 1.5rem 1rem; }
+    .setup-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.3s ease;
     }
   </style>
 </head>
 <body>
+  <script src="/shared/identity.js"></script>
+  <script src="/shared/nav.js"></script>
+
   <div class="container">
     <div class="epigraph">
       <q>Sunlight is the best disinfectant</q>
@@ -208,10 +98,10 @@
         <h1>Claude Code Adoption</h1>
         <div class="meta" id="period"></div>
       </div>
-      <button class="refresh-btn" id="refreshBtn" onclick="loadData()">Refresh</button>
+      <button class="btn" id="refreshBtn" onclick="loadData()">Refresh</button>
     </div>
 
-    <div class="summary" id="summary" style="display:none">
+    <div class="summary" id="summary" style="display:none;grid-template-columns:repeat(4,1fr)">
       <div class="card">
         <div class="label">Team Members</div>
         <div class="value" id="totalUsers">&mdash;</div>
@@ -225,6 +115,11 @@
         <div class="label">This Week</div>
         <div class="value" id="totalWeeklyCost">&mdash;</div>
         <div class="detail" id="totalWeeklySessions"></div>
+      </div>
+      <div class="card">
+        <div class="label">Team Setup</div>
+        <div class="value" id="avgSetup">&mdash;</div>
+        <div class="detail" id="setupDetail"></div>
       </div>
     </div>
 
@@ -247,11 +142,10 @@
   </div>
 
 <script>
-  let users = [];
-  let sortKey = "name";
-  let sortDir = 1;
+  var users = [];
+  var sortKey = "name";
+  var sortDir = 1;
 
-  /* ——— Formatters ——— */
   function fmtCost(n) {
     if (n === 0) return "$0.00";
     if (n < 0.01) return "<$0.01";
@@ -267,7 +161,6 @@
     return n + " session" + (n !== 1 ? "s" : "");
   }
 
-  /* ——— Rendering ——— */
   function renderTable() {
     var sorted = users.slice().sort(function (a, b) {
       if (sortKey === "name") {
@@ -315,7 +208,6 @@
     }
     tbody.innerHTML = html;
 
-    /* Summary cards */
     document.getElementById("summary").style.display = "grid";
     document.getElementById("totalUsers").textContent = users.length;
 
@@ -338,7 +230,6 @@
     return d.innerHTML;
   }
 
-  /* ——— Sort headers ——— */
   var ths = document.querySelectorAll("th[data-key]");
   for (var t = 0; t < ths.length; t++) {
     (function (th) {
@@ -358,7 +249,6 @@
     })(ths[t]);
   }
 
-  /* ——— Data fetch ——— */
   function loadData() {
     var btn = document.getElementById("refreshBtn");
     btn.disabled = true;
@@ -389,7 +279,11 @@
       });
   }
 
-  loadData();
+  /* — Init: identity gate then load — */
+  OrenIdentity.requireIdentity().then(function (user) {
+    OrenNav.render(user);
+    loadData();
+  });
 </script>
 </body>
 </html>

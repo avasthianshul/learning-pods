@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist — Oren Adoption</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/theme.css">
+  <style>
+    .progress-wrap {
+      background: #13131f;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .progress-text {
+      font-size: 0.8rem;
+      color: #a1a1aa;
+      white-space: nowrap;
+    }
+    .progress-text strong {
+      color: #fafafa;
+      font-weight: 600;
+    }
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #2B7A4B;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .progress-pct {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fafafa;
+      white-space: nowrap;
+      min-width: 3.5rem;
+      text-align: right;
+    }
+
+    .checklist-group {
+      background: #13131f;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1rem;
+    }
+    .group-title {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #52525b;
+      margin-bottom: 1rem;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .checklist-item:first-child {
+      border-top: none;
+    }
+    .checklist-item:hover {
+      opacity: 0.85;
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 5px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .check-box svg {
+      width: 12px;
+      height: 12px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .checklist-item.checked .check-box {
+      background: #2B7A4B;
+      border-color: #2B7A4B;
+    }
+    .checklist-item.checked .check-box svg {
+      opacity: 1;
+    }
+
+    .check-label {
+      font-size: 0.85rem;
+      color: #a1a1aa;
+      transition: color 0.15s;
+    }
+    .checklist-item.checked .check-label {
+      color: #52525b;
+    }
+
+    .checklist-item.saving {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <script src="/shared/identity.js"></script>
+  <script src="/shared/nav.js"></script>
+
+  <div class="container">
+    <div class="epigraph">
+      <q>Sunlight is the best disinfectant</q>
+    </div>
+
+    <div class="header">
+      <div>
+        <h1>Setup Checklist</h1>
+        <div class="meta" id="checklistMeta"></div>
+      </div>
+      <button class="btn" id="refreshBtn" onclick="loadChecklist()">Refresh</button>
+    </div>
+
+    <div id="checklistContainer">
+      <div class="state-msg loading"><div class="spinner"></div><p>Loading checklist&hellip;</p></div>
+    </div>
+  </div>
+
+<script>
+  var currentUser = null;
+
+  var CHECKLIST_ITEMS = [
+    { group: "Getting Started", items: [
+      { key: "warp_installed",   label: "Installed Warp Terminal" },
+      { key: "claude_installed", label: "Installed Claude Code or Claude Desktop" },
+      { key: "github_account",   label: "Created GitHub account" }
+    ]},
+    { group: "First Steps", items: [
+      { key: "terminal_basics",  label: "Can navigate the terminal (ls, cd, pwd)" },
+      { key: "projects_folder",  label: "Created ~/claude_projects/ folder" },
+      { key: "first_app",        label: "Built first app with Claude Code" }
+    ]},
+    { group: "GitHub & Sharing", items: [
+      { key: "github_ssh",       label: "GitHub SSH connected" },
+      { key: "cloned_repo",      label: "Cloned the learning_pods repo" },
+      { key: "pushed_to_github", label: "Pushed an app to GitHub" }
+    ]},
+    { group: "Tool Connections", items: [
+      { key: "slack_connected",  label: "Slack connected to Claude" },
+      { key: "gdrive_connected", label: "Google Drive connected to Claude" },
+      { key: "zoho_connected",   label: "Zoho Bigin connected to Claude" },
+      { key: "vercel_connected", label: "Vercel connected to Claude" }
+    ]},
+    { group: "Tools in Action", items: [
+      { key: "slack_used",   label: "Sent a message or searched Slack via /slack" },
+      { key: "gdrive_used",  label: "Listed or read a file via /google-drive" },
+      { key: "zoho_used",    label: "Queried deals or contacts via /zoho-bigin" },
+      { key: "github_used",  label: "Created an issue or PR via /github" }
+    ]},
+    { group: "Skills & Deployment", items: [
+      { key: "deployed_vercel", label: "Deployed an app to Vercel" },
+      { key: "created_skill",   label: "Created a custom skill" },
+      { key: "shipped_skill",   label: "Shipped a skill to shared repo" }
+    ]}
+  ];
+
+  var TOTAL_ITEMS = 0;
+  for (var g = 0; g < CHECKLIST_ITEMS.length; g++) {
+    TOTAL_ITEMS += CHECKLIST_ITEMS[g].items.length;
+  }
+
+  var checkedItems = {};
+
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function countChecked() {
+    var n = 0;
+    for (var k in checkedItems) {
+      if (checkedItems[k]) n++;
+    }
+    return n;
+  }
+
+  function renderChecklist() {
+    var done = countChecked();
+    var pct = Math.round((done / TOTAL_ITEMS) * 100);
+
+    var html = '';
+
+    html += '<div class="progress-wrap">'
+      + '<div class="progress-text"><strong>' + done + '</strong> of ' + TOTAL_ITEMS + ' completed</div>'
+      + '<div class="progress-bar"><div class="progress-bar-fill" style="width:' + pct + '%"></div></div>'
+      + '<div class="progress-pct">' + pct + '%</div>'
+      + '</div>';
+
+    for (var g = 0; g < CHECKLIST_ITEMS.length; g++) {
+      var group = CHECKLIST_ITEMS[g];
+      html += '<div class="checklist-group">';
+      html += '<div class="group-title">' + esc(group.group) + '</div>';
+
+      for (var i = 0; i < group.items.length; i++) {
+        var item = group.items[i];
+        var isChecked = !!checkedItems[item.key];
+        html += '<div class="checklist-item' + (isChecked ? ' checked' : '') + '" data-key="' + item.key + '">'
+          + '<div class="check-box">'
+          + '<svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+          + '</div>'
+          + '<span class="check-label">' + esc(item.label) + '</span>'
+          + '</div>';
+      }
+
+      html += '</div>';
+    }
+
+    document.getElementById("checklistContainer").innerHTML = html;
+    document.getElementById("checklistMeta").textContent = done + " of " + TOTAL_ITEMS + " completed";
+
+    bindClicks();
+  }
+
+  function bindClicks() {
+    var items = document.querySelectorAll(".checklist-item");
+    for (var i = 0; i < items.length; i++) {
+      (function (el) {
+        el.addEventListener("click", function () {
+          if (el.classList.contains("saving")) return;
+
+          var key = el.getAttribute("data-key");
+          var newState = !checkedItems[key];
+
+          checkedItems[key] = newState;
+          el.classList.add("saving");
+
+          if (newState) {
+            el.classList.add("checked");
+          } else {
+            el.classList.remove("checked");
+          }
+
+          updateProgressUI();
+
+          fetch("/api/checklist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userEmail: currentUser.email,
+              userName: currentUser.name,
+              itemKey: key,
+              checked: newState
+            })
+          })
+          .then(function (r) {
+            if (!r.ok) return r.json().then(function (b) { throw new Error(b.error); });
+            return r.json();
+          })
+          .then(function () {
+            el.classList.remove("saving");
+          })
+          .catch(function () {
+            checkedItems[key] = !newState;
+            if (!newState) {
+              el.classList.add("checked");
+            } else {
+              el.classList.remove("checked");
+            }
+            updateProgressUI();
+            el.classList.remove("saving");
+          });
+        });
+      })(items[i]);
+    }
+  }
+
+  function updateProgressUI() {
+    var done = countChecked();
+    var pct = Math.round((done / TOTAL_ITEMS) * 100);
+
+    var textEl = document.querySelector(".progress-text");
+    if (textEl) textEl.innerHTML = '<strong>' + done + '</strong> of ' + TOTAL_ITEMS + ' completed';
+
+    var fillEl = document.querySelector(".progress-bar-fill");
+    if (fillEl) fillEl.style.width = pct + '%';
+
+    var pctEl = document.querySelector(".progress-pct");
+    if (pctEl) pctEl.textContent = pct + '%';
+
+    document.getElementById("checklistMeta").textContent = done + " of " + TOTAL_ITEMS + " completed";
+  }
+
+  function loadChecklist() {
+    var btn = document.getElementById("refreshBtn");
+    btn.disabled = true;
+    btn.textContent = "Loading\u2026";
+
+    fetch("/api/checklist?user=" + encodeURIComponent(currentUser.email))
+      .then(function (r) {
+        if (!r.ok) return r.json().then(function (b) { throw new Error(b.error || "HTTP " + r.status); });
+        return r.json();
+      })
+      .then(function (data) {
+        checkedItems = {};
+        var items = data.items || [];
+        for (var i = 0; i < items.length; i++) {
+          checkedItems[items[i]] = true;
+        }
+        renderChecklist();
+      })
+      .catch(function (err) {
+        document.getElementById("checklistContainer").innerHTML =
+          '<div class="state-msg error"><p>' + esc(err.message) + '</p></div>';
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.textContent = "Refresh";
+      });
+  }
+
+  OrenIdentity.requireIdentity().then(function (user) {
+    currentUser = user;
+    OrenNav.render(user);
+    loadChecklist();
+  });
+</script>
+</body>
+</html>

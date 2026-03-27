@@ -1,0 +1,133 @@
+/* Oren Adoption Dashboard — Shared Theme */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #0f0f1a;
+  color: #a1a1aa;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 960px; margin: 0 auto; padding: 3rem 1.5rem; padding-top: 5rem; }
+
+/* — Epigraph — */
+.epigraph {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.epigraph q {
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #52525b;
+  font-style: normal;
+}
+
+/* — Page header — */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+.header h1 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fafafa;
+  letter-spacing: -0.01em;
+}
+.header .meta {
+  font-size: 0.75rem;
+  color: #52525b;
+  margin-top: 0.25rem;
+}
+
+/* — Buttons — */
+.btn {
+  background: transparent;
+  color: #71717a;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+.btn:hover { color: #fafafa; border-color: rgba(255,255,255,0.15); }
+.btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-primary {
+  background: #1E2C56;
+  color: #fafafa;
+  border-color: #1E2C56;
+}
+.btn-primary:hover { background: #253768; }
+
+/* — Summary cards — */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.card {
+  background: #13131f;
+  padding: 1.25rem 1.5rem;
+}
+.card .label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #52525b;
+  margin-bottom: 0.5rem;
+}
+.card .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fafafa;
+  letter-spacing: -0.02em;
+}
+.card .detail {
+  font-size: 0.7rem;
+  color: #4A90D9;
+  margin-top: 0.2rem;
+}
+
+/* — States — */
+.state-msg { text-align: center; padding: 3rem 1rem; }
+.state-msg.loading { color: #52525b; }
+.state-msg.error { color: #ef4444; }
+.state-msg.empty { color: #3f3f46; }
+.state-msg p { font-size: 0.8rem; margin-top: 0.5rem; }
+
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.06);
+  border-top-color: #4A90D9;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 0.75rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.footer {
+  text-align: center;
+  font-size: 0.65rem;
+  color: #27272a;
+  margin-top: 2rem;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .summary { grid-template-columns: 1fr; }
+  .container { padding: 1.5rem 1rem; padding-top: 4.5rem; }
+}
