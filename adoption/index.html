@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Adoption — Oren</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #a1a1aa;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+    /* — Epigraph — */
+    .epigraph {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .epigraph q {
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #52525b;
+      font-style: normal;
+    }
+
+    /* — Header — */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #fafafa;
+      letter-spacing: -0.01em;
+    }
+    .header .meta {
+      font-size: 0.75rem;
+      color: #52525b;
+      margin-top: 0.25rem;
+    }
+    .refresh-btn {
+      background: transparent;
+      color: #71717a;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+    .refresh-btn:hover { color: #fafafa; border-color: rgba(255,255,255,0.15); }
+    .refresh-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* — Summary cards — */
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: #13131f;
+      padding: 1.25rem 1.5rem;
+    }
+    .card .label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #52525b;
+      margin-bottom: 0.5rem;
+    }
+    .card .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fafafa;
+      letter-spacing: -0.02em;
+    }
+    .card .detail {
+      font-size: 0.7rem;
+      color: #4A90D9;
+      margin-top: 0.2rem;
+    }
+
+    /* — Table — */
+    .table-wrap {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+
+    th {
+      background: #13131f;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #52525b;
+      padding: 0.7rem 1.25rem;
+      text-align: left;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.15s;
+      white-space: nowrap;
+    }
+    th:hover { color: #a1a1aa; }
+    th.sorted { color: #fafafa; }
+    .sort-indicator {
+      display: inline-block;
+      margin-left: 0.35rem;
+      font-size: 0.55rem;
+      opacity: 0;
+      transition: opacity 0.15s;
+      vertical-align: middle;
+    }
+    th.sorted .sort-indicator { opacity: 1; }
+
+    td {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    tr:hover td { background: rgba(255,255,255,0.015); }
+
+    .user-name { font-weight: 500; color: #fafafa; font-size: 0.85rem; }
+    .user-email { font-size: 0.7rem; color: #52525b; margin-top: 0.1rem; }
+    .user-role {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      margin-top: 0.3rem;
+    }
+    .role-admin { background: rgba(43,122,75,0.15); color: #2B7A4B; }
+    .role-member { background: rgba(74,144,217,0.1); color: #4A90D9; }
+    .role-unknown { background: rgba(255,255,255,0.05); color: #52525b; }
+
+    .metric-cost { font-weight: 600; color: #fafafa; font-size: 0.9rem; }
+    .metric-tokens { font-size: 0.7rem; color: #52525b; margin-top: 0.15rem; }
+    .metric-sessions { font-size: 0.7rem; color: #3d7abd; margin-top: 0.1rem; }
+    .metric-zero .metric-cost { color: #3f3f46; font-weight: 400; }
+
+    /* — States — */
+    .state-msg {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .state-msg.loading { color: #52525b; }
+    .state-msg.error { color: #ef4444; }
+    .state-msg.empty { color: #3f3f46; }
+    .state-msg p { font-size: 0.8rem; margin-top: 0.5rem; }
+
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.06);
+      border-top-color: #4A90D9;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 0.75rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .footer {
+      text-align: center;
+      font-size: 0.65rem;
+      color: #27272a;
+      margin-top: 2rem;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .summary { grid-template-columns: 1fr; }
+      .container { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="epigraph">
+      <q>Sunlight is the best disinfectant</q>
+    </div>
+
+    <div class="header">
+      <div>
+        <h1>Claude Code Adoption</h1>
+        <div class="meta" id="period"></div>
+      </div>
+      <button class="refresh-btn" id="refreshBtn" onclick="loadData()">Refresh</button>
+    </div>
+
+    <div class="summary" id="summary" style="display:none">
+      <div class="card">
+        <div class="label">Team Members</div>
+        <div class="value" id="totalUsers">&mdash;</div>
+      </div>
+      <div class="card">
+        <div class="label">Today</div>
+        <div class="value" id="totalDailyCost">&mdash;</div>
+        <div class="detail" id="totalDailySessions"></div>
+      </div>
+      <div class="card">
+        <div class="label">This Week</div>
+        <div class="value" id="totalWeeklyCost">&mdash;</div>
+        <div class="detail" id="totalWeeklySessions"></div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="name" class="sorted">User <span class="sort-indicator">&#9650;</span></th>
+            <th data-key="daily">Daily Usage <span class="sort-indicator">&#9650;</span></th>
+            <th data-key="weekly">Weekly Usage <span class="sort-indicator">&#9650;</span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="3"><div class="state-msg loading"><div class="spinner"></div><p>Loading usage data&hellip;</p></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer" id="footer"></div>
+  </div>
+
+<script>
+  let users = [];
+  let sortKey = "name";
+  let sortDir = 1;
+
+  /* ——— Formatters ——— */
+  function fmtCost(n) {
+    if (n === 0) return "$0.00";
+    if (n < 0.01) return "<$0.01";
+    return "$" + n.toFixed(2);
+  }
+  function fmtTokens(n) {
+    if (n === 0) return "0 tokens";
+    if (n < 1000) return n + " tokens";
+    if (n < 1e6) return (n / 1000).toFixed(1) + "K tokens";
+    return (n / 1e6).toFixed(2) + "M tokens";
+  }
+  function fmtSessions(n) {
+    return n + " session" + (n !== 1 ? "s" : "");
+  }
+
+  /* ——— Rendering ——— */
+  function renderTable() {
+    var sorted = users.slice().sort(function (a, b) {
+      if (sortKey === "name") {
+        var va = (a.name || a.email).toLowerCase();
+        var vb = (b.name || b.email).toLowerCase();
+        return sortDir * va.localeCompare(vb);
+      }
+      var ka = sortKey === "daily" ? a.daily.cost : a.weekly.cost;
+      var kb = sortKey === "daily" ? b.daily.cost : b.weekly.cost;
+      return sortDir * (ka - kb);
+    });
+
+    var tbody = document.getElementById("tbody");
+
+    if (sorted.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="3"><div class="state-msg empty"><p>No usage data yet. Data appears within 1 hour of the first Claude Code session.</p></div></td></tr>';
+      return;
+    }
+
+    var html = "";
+    for (var i = 0; i < sorted.length; i++) {
+      var u = sorted[i];
+      var roleClass = u.role === "admin" ? "role-admin" : u.role === "member" ? "role-member" : "role-unknown";
+      var dZero = u.daily.cost === 0 && u.daily.sessions === 0 ? " metric-zero" : "";
+      var wZero = u.weekly.cost === 0 && u.weekly.sessions === 0 ? " metric-zero" : "";
+      var showEmail = u.name !== u.email;
+
+      html += "<tr>"
+        + "<td>"
+          + '<div class="user-name">' + esc(u.name) + "</div>"
+          + (showEmail ? '<div class="user-email">' + esc(u.email) + "</div>" : "")
+          + '<span class="user-role ' + roleClass + '">' + esc(u.role) + "</span>"
+        + "</td>"
+        + '<td class="' + dZero.trim() + '">'
+          + '<div class="metric-cost">' + fmtCost(u.daily.cost) + "</div>"
+          + '<div class="metric-tokens">' + fmtTokens(u.daily.inputTokens + u.daily.outputTokens) + "</div>"
+          + '<div class="metric-sessions">' + fmtSessions(u.daily.sessions) + "</div>"
+        + "</td>"
+        + '<td class="' + wZero.trim() + '">'
+          + '<div class="metric-cost">' + fmtCost(u.weekly.cost) + "</div>"
+          + '<div class="metric-tokens">' + fmtTokens(u.weekly.inputTokens + u.weekly.outputTokens) + "</div>"
+          + '<div class="metric-sessions">' + fmtSessions(u.weekly.sessions) + "</div>"
+        + "</td>"
+      + "</tr>";
+    }
+    tbody.innerHTML = html;
+
+    /* Summary cards */
+    document.getElementById("summary").style.display = "grid";
+    document.getElementById("totalUsers").textContent = users.length;
+
+    var dCost = 0, wCost = 0, dSess = 0, wSess = 0;
+    for (var j = 0; j < users.length; j++) {
+      dCost += users[j].daily.cost;
+      wCost += users[j].weekly.cost;
+      dSess += users[j].daily.sessions;
+      wSess += users[j].weekly.sessions;
+    }
+    document.getElementById("totalDailyCost").textContent = fmtCost(dCost);
+    document.getElementById("totalWeeklyCost").textContent = fmtCost(wCost);
+    document.getElementById("totalDailySessions").textContent = fmtSessions(dSess);
+    document.getElementById("totalWeeklySessions").textContent = fmtSessions(wSess);
+  }
+
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  /* ——— Sort headers ——— */
+  var ths = document.querySelectorAll("th[data-key]");
+  for (var t = 0; t < ths.length; t++) {
+    (function (th) {
+      th.addEventListener("click", function () {
+        var key = th.getAttribute("data-key");
+        if (sortKey === key) { sortDir *= -1; }
+        else { sortKey = key; sortDir = key === "name" ? 1 : -1; }
+
+        for (var i = 0; i < ths.length; i++) {
+          ths[i].classList.remove("sorted");
+          ths[i].querySelector(".sort-indicator").innerHTML = "&#9650;";
+        }
+        th.classList.add("sorted");
+        th.querySelector(".sort-indicator").innerHTML = sortDir === 1 ? "&#9650;" : "&#9660;";
+        renderTable();
+      });
+    })(ths[t]);
+  }
+
+  /* ——— Data fetch ——— */
+  function loadData() {
+    var btn = document.getElementById("refreshBtn");
+    btn.disabled = true;
+    btn.textContent = "Loading\u2026";
+    document.getElementById("tbody").innerHTML =
+      '<tr><td colspan="3"><div class="state-msg loading"><div class="spinner"></div><p>Loading usage data&hellip;</p></div></td></tr>';
+
+    fetch("/api/usage")
+      .then(function (r) {
+        if (!r.ok) return r.json().then(function (b) { throw new Error(b.error || "HTTP " + r.status); });
+        return r.json();
+      })
+      .then(function (data) {
+        users = data.users || [];
+        document.getElementById("period").textContent =
+          "Week of " + data.period.weeklyStart + " \u2014 " + data.period.weeklyEnd;
+        document.getElementById("footer").textContent =
+          "Last refreshed " + new Date(data.fetchedAt).toLocaleString();
+        renderTable();
+      })
+      .catch(function (err) {
+        document.getElementById("tbody").innerHTML =
+          '<tr><td colspan="3"><div class="state-msg error"><p>' + esc(err.message) + "</p></div></td></tr>";
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.textContent = "Refresh";
+      });
+  }
+
+  loadData();
+</script>
+</body>
+</html>
