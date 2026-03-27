@@ -2,7 +2,7 @@ var { sql } = require("@vercel/postgres");
 
 var VALID_KEYS = [
   "warp_installed", "claude_installed", "github_account",
-  "terminal_basics", "projects_folder", "first_app",
+  "terminal_basics", "projects_folder", "default_terminal", "first_app",
   "github_ssh", "cloned_repo", "pushed_to_github",
   "slack_connected", "gdrive_connected", "zoho_connected", "vercel_connected",
   "slack_used", "gdrive_used", "zoho_used", "github_used",

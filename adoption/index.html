@@ -212,7 +212,7 @@
           + '<div class="metric-sessions">' + fmtSessions(u.weekly.sessions) + "</div>"
         + "</td>";
 
-      var si = checklistSummary[u.email] || { done: 0, total: 20, pct: 0 };
+      var si = checklistSummary[u.email] || { done: 0, total: 21, pct: 0 };
       var pctColor = si.pct === 100 ? "#2B7A4B" : si.pct >= 50 ? "#a1a1aa" : "#ef4444";
       var barColor = si.pct === 100 ? "#2B7A4B" : si.pct >= 50 ? "#4A90D9" : "#ef4444";
 

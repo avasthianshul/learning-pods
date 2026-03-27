@@ -1,6 +1,6 @@
 var { sql } = require("@vercel/postgres");
 
-var TOTAL_ITEMS = 20;
+var TOTAL_ITEMS = 21;
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
