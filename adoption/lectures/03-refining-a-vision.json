@@ -1,0 +1,163 @@
+{
+  "title": "Refining a Vision",
+  "screens": [
+    {
+      "type": "title",
+      "heading": "Refining a Vision",
+      "subtitle": "From rough draft to live website in one session"
+    },
+    {
+      "type": "statement",
+      "text": "Your first draft is never the final product.",
+      "sub": "Not because you did something wrong. Because that's how building works."
+    },
+    {
+      "type": "text",
+      "heading": "The best builders revise",
+      "body": "Writing a first draft and calling it done is like writing an email and never re-reading it before hitting send. Every great result — a proposal, a presentation, a website — goes through rounds of revision. The difference between good and great is how many times you looked at it with fresh eyes and made it better. Claude makes each revision take seconds instead of hours."
+    },
+    {
+      "type": "story",
+      "heading": "The Revision Loop",
+      "steps": [
+        {
+          "label": "Look",
+          "detail": "Open your project in the browser. Actually look at it. Scroll through. Click things. Use it like a real person would."
+        },
+        {
+          "label": "Notice",
+          "detail": "What catches your eye? Something ugly, something confusing, something missing, something that doesn't feel right. Trust your instincts."
+        },
+        {
+          "label": "Describe",
+          "detail": "Tell Claude exactly what you noticed and what you want instead. Be specific — not 'fix the chart' but 'make the bar chart show percentages instead of raw numbers.'"
+        },
+        {
+          "label": "Update",
+          "detail": "Claude makes the change. Usually takes under a minute. Refresh your browser to see the result."
+        },
+        {
+          "label": "Repeat",
+          "detail": "Go back to step one. Each loop sharpens the result. After 5-6 rounds, you have something you're genuinely proud of."
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "text": "Each loop takes 1-2 minutes. After 5 or 6, you have something genuinely good."
+    },
+    {
+      "type": "comparison",
+      "heading": "Revision prompts: bad vs. good",
+      "left": {
+        "label": "Vague (Claude guesses)",
+        "items": [
+          "\"Fix it.\"",
+          "\"Make it look better.\"",
+          "\"The chart is wrong.\"",
+          "\"It's not what I wanted.\"",
+          "\"Can you improve the layout?\""
+        ]
+      },
+      "right": {
+        "label": "Specific (Claude nails it)",
+        "items": [
+          "\"Move the total to the top of the page and make it twice as large.\"",
+          "\"Change the background to dark blue and use white text for all headings.\"",
+          "\"The bar chart should sort deals from highest to lowest value.\"",
+          "\"Add a row for Q4 data — here are the numbers: 120, 85, 200.\"",
+          "\"Put the filters on the left side in a narrow column, not across the top.\""
+        ]
+      }
+    },
+    {
+      "type": "statement",
+      "text": "Your taste is your guide.",
+      "sub": "You don't need to know how to code. You need to know what looks right and what doesn't. That's your job."
+    },
+    {
+      "type": "interactive",
+      "title": "Revise your project right now",
+      "instruction": "Open the project you built last session. Look at it for 30 seconds. Then describe three specific changes.",
+      "command": "I want to make three changes to my project:\n1. [Your first change]\n2. [Your second change]\n3. [Your third change]",
+      "explanation": "Replace the bracketed text with real changes you want. Be as specific as possible — mention colors, positions, sizes, exact text. Claude will make all three changes at once."
+    },
+    {
+      "type": "statement",
+      "text": "Always prefer the API.",
+      "sub": "When Claude needs to interact with another tool, there are two ways to do it. One is fast. One breaks."
+    },
+    {
+      "type": "comparison",
+      "heading": "Two ways to talk to other tools",
+      "left": {
+        "label": "API / Command Line",
+        "items": [
+          "Talks directly to the service — like calling someone on the phone",
+          "Takes about 300 milliseconds",
+          "Works the same way every single time",
+          "Doesn't care what the website looks like",
+          "This is what professionals use"
+        ]
+      },
+      "right": {
+        "label": "Browser Automation",
+        "items": [
+          "Opens a browser and clicks around — like hiring someone to use the website for you",
+          "Takes 10+ seconds per action",
+          "Breaks whenever the website changes its layout",
+          "Fragile, slow, and unreliable",
+          "Avoid this unless there's truly no other option"
+        ]
+      }
+    },
+    {
+      "type": "statement",
+      "text": "Let's ship it.",
+      "sub": "Your project has been living on your computer. Time to put it on the internet."
+    },
+    {
+      "type": "text",
+      "heading": "Vercel: your project, live in 30 seconds",
+      "body": "Vercel is a service that takes the files on your computer and puts them on the internet with a real web address anyone can visit. It's free for projects like ours. You don't need to understand servers or hosting — Claude handles everything. You'll get a URL like your-project.vercel.app that works on any phone, tablet, or computer in the world."
+    },
+    {
+      "type": "interactive",
+      "title": "Deploy to Vercel",
+      "instruction": "Ask Claude to deploy your project. You'll get a live URL you can share with anyone.",
+      "command": "Deploy this project to Vercel. Give me a live URL.",
+      "explanation": "Claude will package your project, upload it to Vercel, and hand you a public link. Open it on your phone to see it live. Send it to a teammate. It's real — it's on the internet."
+    },
+    {
+      "type": "activity",
+      "title": "Ship it and share it",
+      "steps": [
+        "Deploy your project using the command above.",
+        "Copy the URL that Claude gives you.",
+        "Open it on your phone — pinch, zoom, scroll. Does it look good?",
+        "Send the link to one teammate via Slack or text.",
+        "Bookmark it. This is yours. You built it."
+      ]
+    },
+    {
+      "type": "reveal",
+      "setup": "Three sessions ago, you had never opened a terminal.",
+      "punchline": "Now you have a live website with a public URL that you built yourself."
+    },
+    {
+      "type": "question",
+      "text": "What surprised you most across these three sessions? What would you build next if you had 30 minutes right now?"
+    },
+    {
+      "type": "recap",
+      "items": [
+        "Revision is the real skill — Look, Notice, Describe, Update, Repeat.",
+        "Specific prompts get specific results. Your taste is your guide.",
+        "Always prefer APIs over browser automation — faster, more reliable.",
+        "Vercel turns your local project into a live website in 30 seconds.",
+        "In three sessions you went from zero to a deployed web app. That's real."
+      ],
+      "next": "Next time: Working with Your Data — connecting to real spreadsheets, pulling live numbers, and building dashboards that update themselves."
+    }
+  ]
+}

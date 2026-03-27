@@ -1,0 +1,186 @@
+{
+  "title": "New World, New Workspace",
+  "screens": [
+    {
+      "type": "title",
+      "heading": "New World, New Workspace",
+      "subtitle": "Lecture 1"
+    },
+    {
+      "type": "statement",
+      "text": "Code is free now."
+    },
+    {
+      "type": "text",
+      "heading": "The old world",
+      "body": "For decades, writing code meant hiring a developer, setting a timeline, and finding a budget. That meant most internal tools — dashboards, reports, trackers, automations — never got built. The cost didn't justify it."
+    },
+    {
+      "type": "statement",
+      "text": "That's over.",
+      "sub": "Describe what you want in plain English. Get it built in minutes. The cost of code just dropped to zero."
+    },
+    {
+      "type": "statement",
+      "text": "We have to think bigger."
+    },
+    {
+      "type": "story",
+      "heading": "Remember learning to use a browser?",
+      "steps": [
+        { "label": "URLs", "detail": "At first, you just typed web addresses" },
+        { "label": "Bookmarks", "detail": "Someone showed you how to save pages" },
+        { "label": "History", "detail": "You discovered you could find pages you forgot to save" },
+        { "label": "Incognito", "detail": "Someone told you about private browsing" },
+        { "label": "Tabs", "detail": "Chrome launched tabs — and multitasking on the web was born" }
+      ]
+    },
+    {
+      "type": "reveal",
+      "setup": "None of that was obvious on day one. You learned it over time, mostly by watching other people.",
+      "punchline": "Claude Code is the same. It has its own learning curve. The easiest way to learn is by doing."
+    },
+    {
+      "type": "statement",
+      "text": "I'll show my flow. You build yours.",
+      "sub": "I use the terminal because I know the keyboard shortcuts. You might prefer the desktop app, the web version, or an IDE extension. There's no single right way."
+    },
+    {
+      "type": "statement",
+      "text": "Your new workspace is a terminal.",
+      "sub": "A terminal is a text-based window where you type commands instead of clicking buttons. That's it. Think of it as texting your computer instead of pointing and clicking."
+    },
+    {
+      "type": "comparison",
+      "heading": "Two ways to talk to a computer",
+      "left": {
+        "label": "GUI (what you know)",
+        "items": ["Graphical User Interface", "Click icons, drag files, use menus", "Finder on Mac, File Explorer on Windows", "Visual — you see everything laid out"]
+      },
+      "right": {
+        "label": "CLI (what we're learning)",
+        "items": ["Command Line Interface", "Type short commands, hit Enter", "The terminal window in Warp", "Fast — once you know 3 commands, you're set"]
+      }
+    },
+    {
+      "type": "grid",
+      "heading": "The only terminal commands you need",
+      "items": [
+        { "title": "pwd", "description": "\"Print working directory\" — shows where you are right now (like checking the address bar in File Explorer)" },
+        { "title": "ls", "description": "\"List\" — shows the files and folders in your current location (like opening a folder and seeing what's inside)" },
+        { "title": "cd folder-name", "description": "\"Change directory\" — moves you into a folder (like double-clicking a folder to open it)" },
+        { "title": "cd ..", "description": "Go back up one folder (like hitting the back button)" },
+        { "title": "claude", "description": "Launches Claude Code — then you just type in plain English and Claude does the rest" }
+      ]
+    },
+    {
+      "type": "reveal",
+      "setup": "If the terminal feels unfamiliar, Warp has a cheat code: click the Files icon in the left sidebar to open a visual File Explorer. You can browse folders and open files just like you're used to.",
+      "punchline": "You don't need to memorize commands. Between the File Explorer and Claude, you'll rarely type terminal commands directly. But knowing pwd, ls, and cd means you're never lost."
+    },
+    {
+      "type": "grid",
+      "heading": "Commands you'll use every day",
+      "items": [
+        { "title": "/memory", "description": "Opens Claude's memory — persistent notes it remembers across sessions" },
+        { "title": "/compact", "description": "Shrinks the conversation to save space (like clearing your desk)" },
+        { "title": "/resume", "description": "Pick up where you left off in a previous session" },
+        { "title": "/exit", "description": "End the current session" },
+        { "title": "/context", "description": "See everything Claude currently knows about your project" },
+        { "title": "Ctrl+Shift+C", "description": "Copy text from the terminal — you'll use this constantly" }
+      ]
+    },
+    {
+      "type": "interactive",
+      "title": "Try it now",
+      "instruction": "Open your terminal and start a Claude Code session. Then type:",
+      "command": "/memory",
+      "explanation": "This opens Claude's memory file — where it stores notes about you and your project. Close it when you're done."
+    },
+    {
+      "type": "interactive",
+      "title": "Now try this",
+      "instruction": "In the same session, type:",
+      "command": "/context",
+      "explanation": "This shows everything Claude knows right now — files it's read, instructions it's following. Take 2 minutes with both commands."
+    },
+    {
+      "type": "comparison",
+      "heading": "Speed matters more than you think",
+      "left": {
+        "label": "GUI / Chatbot UI",
+        "items": ["~10 seconds per action", "Clicking through menus", "Waiting for page loads", "Fine for simple tasks"]
+      },
+      "right": {
+        "label": "Script / API / CLI",
+        "items": ["~300 milliseconds", "Type a command, get a result", "No waiting", "30× faster compounds"]
+      }
+    },
+    {
+      "type": "statement",
+      "text": "30× faster matters.",
+      "sub": "If an API or command-line tool exists, use that. Don't use browser automation — it's slower and less reliable."
+    },
+    {
+      "type": "activity",
+      "title": "Let's get connected — together",
+      "steps": [
+        "Create an SSH key (a secure password that lets your computer talk to GitHub)",
+        "Add it to your GitHub account",
+        "Connect Git to Claude Code",
+        "Clone the Oren repo — our shared codebase"
+      ]
+    },
+    {
+      "type": "interactive",
+      "title": "Step 1: Create your SSH key",
+      "instruction": "Open Claude Code and say:",
+      "command": "Create an SSH key for my GitHub account. My email is [your-email]@orennow.com",
+      "explanation": "Claude will generate the key, show you the public key to copy, and tell you exactly where to paste it in GitHub. Follow its instructions. Raise your hand if you get stuck."
+    },
+    {
+      "type": "interactive",
+      "title": "Step 2: Clone the Oren repo",
+      "instruction": "Once your SSH key is connected, say:",
+      "command": "Clone the Oren learning pods repo from GitHub into my claude_projects folder",
+      "explanation": "Claude will run the git commands for you. When it's done, you'll have a local copy of our shared repo. Wait until everyone has it before we continue."
+    },
+    {
+      "type": "question",
+      "text": "\"You ship your org chart.\"\n\nDoes anyone know what this means?"
+    },
+    {
+      "type": "reveal",
+      "setup": "The way a company is organized shows up in the things it builds. Teams that don't talk to each other build products that don't talk to each other.",
+      "punchline": "Our repo makes our organization machine-readable. It contains our team structure, our workflows, our tools — described in a way Claude can read and act on. One level of abstraction."
+    },
+    {
+      "type": "interactive",
+      "title": "Let's build something",
+      "instruction": "Open Claude Code in the Oren repo and say something like:",
+      "command": "Create a simple HTML page called \"hello.html\" in a new folder called \"my-first-page\". It should have a dark background, my name in big white text, and a short bio underneath. Use the Oren brand colors.",
+      "explanation": "When Claude is done, open the file in your browser. You just built a web page by describing it."
+    },
+    {
+      "type": "question",
+      "text": "Let's review a real conversation.\n\nWas the prompt clear? Where was it vague? What made Claude give a great response?\n\nDoes anyone want to share — or should I share mine?"
+    },
+    {
+      "type": "recap",
+      "items": [
+        "Code is free — think bigger about what's worth building",
+        "Claude Code has a learning curve, just like browsers did",
+        "Find your own flow — there's no single right way",
+        "CLI = typing commands; GUI = clicking buttons — you'll use both",
+        "Three terminal commands: pwd (where am I), ls (what's here), cd (go there)",
+        "Type \"claude\" to launch Claude Code, then talk in plain English",
+        "Key commands: /memory, /compact, /resume, /exit, /context",
+        "Speed matters — APIs and CLI beat browser automation",
+        "We connected to GitHub and cloned the Oren repo",
+        "\"You ship your org chart\" — our repo is machine-readable",
+        "We built our first web page by describing it"
+      ],
+      "next": "Next: Building a Vision — going from idea to first draft."
+    }
+  ]
+}

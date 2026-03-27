@@ -1,4 +1,6 @@
-# Learning Pods — Claude Code Training Series
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Context
 
@@ -10,6 +12,56 @@ This is a training repository for non-technical Oren team members learning Claud
 - When you create files, say what each file is for in one sentence.
 - If something fails, explain the error like you're talking to a smart non-programmer. Never say "just run [complex command]" — run it yourself and explain the result.
 - Keep responses short. One paragraph, not five.
+
+## Common Commands
+
+```bash
+# Generate PPTX slides from a pod's README
+python shared/pptx_generator.py pods/XX-name/README.md
+# Output: README.pptx in the same pod directory
+
+# Verify all tools are installed and authenticated
+python setup/verify.py
+
+# Copy skills from repo to Claude's skill directory
+# Windows:
+powershell setup/copy-skills.ps1
+# Mac:
+bash setup/copy-skills.sh
+
+# Install dependencies for the adoption dashboard
+npm install --prefix adoption/
+```
+
+## Architecture
+
+The repo has two main parts:
+
+### 1. Curriculum (`pods/`, `shared/`, `skills/`, `setup/`)
+
+A 13-week series (pods 00–13). Each pod follows this structure:
+- `README.md` — lecture content in markdown
+- `README.pptx` — presentation slides generated from README.md via `shared/pptx_generator.py`
+- `exercises/*.md` — step-by-step practice exercises
+- `app/index.html` — browser demo (open directly, no server needed)
+
+Pod apps link to the shared stylesheet via relative path: `<link rel="stylesheet" href="../../shared/dark-theme.css">`.
+
+The PPTX generator (`shared/pptx_generator.py`) uses `shared/theme.py` for the Oren color palette and python-pptx helpers. Both the CSS and Python theme files define the same brand colors — keep them in sync.
+
+Skills in `skills/` are source-of-truth definitions that get copied to `~/.claude/skills/` during setup. Each subfolder has a `SKILL.md` file.
+
+### 2. Adoption Dashboard (`adoption/`)
+
+A live Vercel-deployed web app tracking Claude Code adoption across the team. Static HTML pages + Vercel serverless functions in `api/`, backed by Vercel Postgres.
+
+- `index.html` — main metrics dashboard
+- `checklist.html`, `chats.html`, `lectures.html`, `polls.html` — feature pages
+- `api/*.js` — serverless endpoints (checklist, lectures, polls, usage, voting, db-setup)
+- `lectures/*.json` — lecture content data files
+- Uses `@vercel/postgres` (only Node dependency)
+- No build step — `vercel.json` routes static files and serverless functions
+- Secrets in `adoption/.env.local` (never committed)
 
 ## Default Stack
 
@@ -36,16 +88,11 @@ All generated web pages and dashboards use the Oren dark theme:
 
 Font: Inter (via Google Fonts CDN) for web, Lato for presentations.
 
-## File Conventions
-
-- Each pod folder: `README.md` (lecture content), `README.pptx` (presentation), `exercises/`, `app/` (browser app)
-- Browser apps: open `app/index.html` directly in a browser — no server needed
-- PPTXs generated via: `python shared/pptx_generator.py pods/XX-name/README.md`
-
 ## Auth & Secrets
 
 - **Credentials live in `~/oren-auth/`** — NEVER in this repo, never committed
 - Skills are in `~/.claude/skills/` — invoke with `/skill-name`
+- Adoption dashboard secrets live in `adoption/.env.local`
 - Never ask students for passwords or tokens. The setup script handled all auth.
 
 ## Available Skills
@@ -57,17 +104,6 @@ Font: Inter (via Google Fonts CDN) for web, Lato for presentations.
 | `/zoho-bigin` | List deals, search contacts, create notes, update pipeline stages |
 | `/vercel` | Deploy projects to a live URL |
 | `/github` | Manage repos, issues, and pull requests |
-
-## Project Structure
-
-```
-learning_pods/
-├── skills/          # Source-of-truth skill files (copied to ~/.claude/skills/)
-├── setup/           # One-time setup scripts and sample configs
-├── shared/          # PPTX generator, theme, sample datasets, shared CSS
-├── pods/01-13/      # Weekly learning pods (README, exercises, browser app)
-└── hackathon/       # Final week challenges and starter kits
-```
 
 ## Python Environment
 

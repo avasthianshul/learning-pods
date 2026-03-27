@@ -1,0 +1,158 @@
+{
+  "title": "Building a Vision",
+  "screens": [
+    {
+      "type": "title",
+      "heading": "Building a Vision",
+      "subtitle": "How to tell Claude exactly what you want"
+    },
+    {
+      "type": "statement",
+      "text": "Specificity is your superpower.",
+      "sub": "The difference between a frustrating tool and a brilliant assistant is how clearly you describe what you need."
+    },
+    {
+      "type": "comparison",
+      "heading": "What Claude hears",
+      "left": {
+        "label": "Vague prompt",
+        "items": [
+          "\"Make me a dashboard.\"",
+          "Claude thinks: Dashboard of what? For whom? What data? What style?",
+          "You get: a generic placeholder with fake numbers",
+          "Then you spend 10 minutes going back and forth"
+        ]
+      },
+      "right": {
+        "label": "Specific prompt",
+        "items": [
+          "\"Build a sales dashboard showing our top 10 deals by value this quarter. Use the Oren dark theme. Show a bar chart and a summary card with total pipeline value.\"",
+          "Claude thinks: Got it. Bar chart, 10 deals, dark theme, summary card.",
+          "You get: something usable on the first try",
+          "One prompt. Done."
+        ]
+      }
+    },
+    {
+      "type": "statement",
+      "text": "30 extra seconds of thinking saves 10 minutes of back-and-forth."
+    },
+    {
+      "type": "grid",
+      "heading": "The Specificity Checklist",
+      "items": [
+        {
+          "title": "What",
+          "description": "What are you building? A page, a chart, a report, a tool? Name it."
+        },
+        {
+          "title": "Who",
+          "description": "Who will use it? You, your team, a client? This changes everything about tone and layout."
+        },
+        {
+          "title": "Data",
+          "description": "What information does it show? Real numbers, categories, dates? Be concrete."
+        },
+        {
+          "title": "Look",
+          "description": "What should it look like? Dark theme, cards, charts, simple table? Reference something you've seen."
+        },
+        {
+          "title": "Behavior",
+          "description": "What should it do? Filter, sort, update, calculate? If it just displays info, say that too."
+        }
+      ]
+    },
+    {
+      "type": "activity",
+      "title": "Try it now: describe something you actually need",
+      "steps": [
+        "Think of one thing you need at work this week — a tracker, a calculator, a summary page, anything.",
+        "Open a blank note or document.",
+        "Write one paragraph describing it using the checklist: What, Who, Data, Look, Behavior.",
+        "Read it back. Would a stranger know exactly what to build? If not, add detail.",
+        "You'll use this description in 10 minutes."
+      ]
+    },
+    {
+      "type": "statement",
+      "text": "Use the APIs. Skip the pre-built workflows.",
+      "sub": "Practice matters. Fit matters. Building it yourself is how you learn what's possible."
+    },
+    {
+      "type": "reveal",
+      "setup": "Pre-built workflows feel productive. Someone already figured it out, right?",
+      "punchline": "Building your own is how you learn. Using someone else's is like reading about swimming."
+    },
+    {
+      "type": "text",
+      "heading": "APIs are building blocks",
+      "body": "Think of an API like a drive-through window. You pull up, ask for something specific, and get it handed back. You already have access to four: Slack (send and read messages), Google Drive (find and read files), Zoho Bigin (deals and contacts), and GitHub (code and projects). Claude knows how to use all of them. You just describe what you want to happen."
+    },
+    {
+      "type": "statement",
+      "text": "Get a bad first draft fast.",
+      "sub": "Perfection on the first try is a myth. Speed to first draft is what matters."
+    },
+    {
+      "type": "story",
+      "heading": "The Iteration Loop",
+      "steps": [
+        {
+          "label": "Describe",
+          "detail": "Write what you want using the specificity checklist. Be concrete, not perfect."
+        },
+        {
+          "label": "Build",
+          "detail": "Give your description to Claude. Let it produce a first draft in under a minute."
+        },
+        {
+          "label": "React",
+          "detail": "Open it. Look at it. What's wrong? What's missing? What surprised you? Trust your gut."
+        },
+        {
+          "label": "Iterate",
+          "detail": "Tell Claude what to change. Be specific again. Each loop gets you closer."
+        }
+      ]
+    },
+    {
+      "type": "activity",
+      "title": "Pick a project, get the first draft",
+      "steps": [
+        "Take the description you wrote earlier.",
+        "Paste it into Claude Code as your prompt.",
+        "Watch it build. Don't interrupt — let it finish.",
+        "Open the result in your browser.",
+        "Write down three things: one thing that's right, one thing that's wrong, one thing that's missing."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Local hosting — making it feel real",
+      "body": "Right now your project is a file on your computer. When you open it in a browser, the address bar says something like file:///C:/Users/you/project/index.html. That works, but some features need a proper web address. Local hosting means running a tiny server on your machine that gives your project a real-looking address like localhost:3000. It's still just your computer — nothing is on the internet yet. Think of it like a dress rehearsal before opening night."
+    },
+    {
+      "type": "interactive",
+      "title": "Serve it locally",
+      "instruction": "Ask Claude to serve your project so you can see it running like a real app.",
+      "command": "Can you serve this project locally so I can preview it in my browser?",
+      "explanation": "Claude will start a small local server and give you a link like localhost:3000. Open that link in your browser. You'll see your project running as if it were a real website. Press Ctrl+C in the terminal to stop it when you're done."
+    },
+    {
+      "type": "question",
+      "text": "Look at your first prompt again. Was it specific enough? What would you add now that you've seen the result?"
+    },
+    {
+      "type": "recap",
+      "items": [
+        "Specificity is the #1 skill — use the checklist: What, Who, Data, Look, Behavior.",
+        "30 seconds of upfront thinking beats 10 minutes of back-and-forth.",
+        "Build your own workflows with APIs — don't rely on pre-built shortcuts.",
+        "Get a bad first draft fast, then iterate. Speed beats perfection.",
+        "Local hosting lets you preview your project like a real app."
+      ],
+      "next": "Next time: Refining a Vision — how to revise your project into something genuinely good, then ship it live to the internet."
+    }
+  ]
+}

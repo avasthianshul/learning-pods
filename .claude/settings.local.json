@@ -8,7 +8,11 @@
       "Read(//c/Users/anshu/AppData/Roaming/com.vercel.cli/**)",
       "Read(//c/Users/anshu/AppData/Local/com.vercel.cli/**)",
       "Bash(while IFS='=' read -r key value)",
-      "Bash(do echo:*)"
+      "Bash(do echo:*)",
+      "Bash(openssl rand:*)",
+      "Bash(for var:*)",
+      "Bash(do npx:*)",
+      "Bash(find /c/Users/anshu/projects/oren_personal/mgmt/learning_pods/adoption -maxdepth 2 -type f \\\\\\(-name *.jsx -o -name *.tsx -o -name *.html \\\\\\) ! -path */node_modules/*)"
     ]
   }
 }
