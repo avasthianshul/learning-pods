@@ -45,6 +45,25 @@ module.exports = async function handler(req, res) {
       )
     `;
 
+    await sql`
+      CREATE TABLE IF NOT EXISTS lectures (
+        id          SERIAL PRIMARY KEY,
+        slug        TEXT UNIQUE NOT NULL,
+        title       TEXT NOT NULL,
+        sort_order  INTEGER NOT NULL,
+        unlocked    BOOLEAN DEFAULT false
+      )
+    `;
+
+    await sql`
+      INSERT INTO lectures (slug, title, sort_order, unlocked)
+      VALUES
+        ('01-new-world-new-workspace', 'New World, New Workspace', 1, true),
+        ('02-building-a-vision', 'Building a Vision', 2, false),
+        ('03-refining-a-vision', 'Refining a Vision', 3, false)
+      ON CONFLICT (slug) DO NOTHING
+    `;
+
     res.status(200).json({ ok: true, message: "Tables created" });
   } catch (err) {
     res.status(500).json({ error: err.message });

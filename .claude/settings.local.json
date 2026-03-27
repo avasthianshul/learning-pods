@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(GH_HOST=github.com gh repo create avasthianshul/learning-pods --public --description \"13-week Claude Code training series for non-technical team members\" --source C:/Users/anshu/projects/oren_personal/mgmt/learning_pods --push=false)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(GIT_SSH_COMMAND=\"ssh -i ~/.ssh/id_ed25519_oren\" git -C /c/Users/anshu/projects/oren_personal/mgmt/learning_pods push origin main)"
     ]
   }
 }

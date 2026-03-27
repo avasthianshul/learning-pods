@@ -4,8 +4,10 @@
 
   var LINKS = [
     { label: "Usage", href: "/" },
-    { label: "Polls", href: "/polls" },
-    { label: "Checklist", href: "/checklist" }
+    { label: "Lectures", href: "/lectures" },
+    { label: "Checklist", href: "/checklist" },
+    { label: "Chats", href: "/chats" },
+    { label: "Polls", href: "/polls" }
   ];
 
   function injectStyles() {
