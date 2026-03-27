@@ -130,10 +130,11 @@
             <th data-key="name" class="sorted">User <span class="sort-indicator">&#9650;</span></th>
             <th data-key="daily">Daily Usage <span class="sort-indicator">&#9650;</span></th>
             <th data-key="weekly">Weekly Usage <span class="sort-indicator">&#9650;</span></th>
+            <th data-key="setup">Setup <span class="sort-indicator">&#9650;</span></th>
           </tr>
         </thead>
         <tbody id="tbody">
-          <tr><td colspan="3"><div class="state-msg loading"><div class="spinner"></div><p>Loading usage data&hellip;</p></div></td></tr>
+          <tr><td colspan="4"><div class="state-msg loading"><div class="spinner"></div><p>Loading usage data&hellip;</p></div></td></tr>
         </tbody>
       </table>
     </div>
@@ -143,6 +144,7 @@
 
 <script>
   var users = [];
+  var checklistSummary = {};
   var sortKey = "name";
   var sortDir = 1;
 
@@ -168,6 +170,11 @@
         var vb = (b.name || b.email).toLowerCase();
         return sortDir * va.localeCompare(vb);
       }
+      if (sortKey === "setup") {
+        var sa = (checklistSummary[a.email] || { pct: 0 }).pct;
+        var sb = (checklistSummary[b.email] || { pct: 0 }).pct;
+        return sortDir * (sa - sb);
+      }
       var ka = sortKey === "daily" ? a.daily.cost : a.weekly.cost;
       var kb = sortKey === "daily" ? b.daily.cost : b.weekly.cost;
       return sortDir * (ka - kb);
@@ -176,7 +183,7 @@
     var tbody = document.getElementById("tbody");
 
     if (sorted.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="3"><div class="state-msg empty"><p>No usage data yet. Data appears within 1 hour of the first Claude Code session.</p></div></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="4"><div class="state-msg empty"><p>No usage data yet. Data appears within 1 hour of the first Claude Code session.</p></div></td></tr>';
       return;
     }
 
@@ -203,6 +210,15 @@
           + '<div class="metric-cost">' + fmtCost(u.weekly.cost) + "</div>"
           + '<div class="metric-tokens">' + fmtTokens(u.weekly.inputTokens + u.weekly.outputTokens) + "</div>"
           + '<div class="metric-sessions">' + fmtSessions(u.weekly.sessions) + "</div>"
+        + "</td>";
+
+      var si = checklistSummary[u.email] || { done: 0, total: 20, pct: 0 };
+      var pctColor = si.pct === 100 ? "#2B7A4B" : si.pct >= 50 ? "#a1a1aa" : "#ef4444";
+      var barColor = si.pct === 100 ? "#2B7A4B" : si.pct >= 50 ? "#4A90D9" : "#ef4444";
+
+      html += '<td>'
+          + '<div class="metric-setup" style="color:' + pctColor + '">' + si.pct + '%</div>'
+          + '<div class="setup-bar"><div class="setup-bar-fill" style="width:' + si.pct + '%;background:' + barColor + '"></div></div>'
         + "</td>"
       + "</tr>";
     }
@@ -222,6 +238,16 @@
     document.getElementById("totalWeeklyCost").textContent = fmtCost(wCost);
     document.getElementById("totalDailySessions").textContent = fmtSessions(dSess);
     document.getElementById("totalWeeklySessions").textContent = fmtSessions(wSess);
+
+    var totalPct = 0, setupCount = 0, doneCount = 0;
+    for (var k = 0; k < users.length; k++) {
+      var s = checklistSummary[users[k].email];
+      if (s) { totalPct += s.pct; doneCount += s.done; }
+      setupCount++;
+    }
+    var avgPct = setupCount > 0 ? Math.round(totalPct / setupCount) : 0;
+    document.getElementById("avgSetup").textContent = avgPct + "%";
+    document.getElementById("setupDetail").textContent = doneCount + " items across team";
   }
 
   function esc(s) {
@@ -254,14 +280,21 @@
     btn.disabled = true;
     btn.textContent = "Loading\u2026";
     document.getElementById("tbody").innerHTML =
-      '<tr><td colspan="3"><div class="state-msg loading"><div class="spinner"></div><p>Loading usage data&hellip;</p></div></td></tr>';
+      '<tr><td colspan="4"><div class="state-msg loading"><div class="spinner"></div><p>Loading usage data&hellip;</p></div></td></tr>';
 
-    fetch("/api/usage")
-      .then(function (r) {
+    Promise.all([
+      fetch("/api/usage").then(function (r) {
         if (!r.ok) return r.json().then(function (b) { throw new Error(b.error || "HTTP " + r.status); });
         return r.json();
+      }),
+      fetch("/api/checklist-summary").then(function (r) {
+        if (!r.ok) return { summary: {} };
+        return r.json();
       })
-      .then(function (data) {
+    ])
+      .then(function (results) {
+        var data = results[0];
+        checklistSummary = results[1].summary || {};
         users = data.users || [];
         document.getElementById("period").textContent =
           "Week of " + data.period.weeklyStart + " \u2014 " + data.period.weeklyEnd;
@@ -271,7 +304,7 @@
       })
       .catch(function (err) {
         document.getElementById("tbody").innerHTML =
-          '<tr><td colspan="3"><div class="state-msg error"><p>' + esc(err.message) + "</p></div></td></tr>";
+          '<tr><td colspan="4"><div class="state-msg error"><p>' + esc(err.message) + "</p></div></td></tr>";
       })
       .finally(function () {
         btn.disabled = false;
