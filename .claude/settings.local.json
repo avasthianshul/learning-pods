@@ -6,7 +6,9 @@
       "Bash(GIT_SSH_COMMAND=\"ssh -i ~/.ssh/id_ed25519_oren\" git -C /c/Users/anshu/projects/oren_personal/mgmt/learning_pods push origin main)",
       "Read(//c/Users/anshu/.local/share/**)",
       "Read(//c/Users/anshu/AppData/Roaming/com.vercel.cli/**)",
-      "Read(//c/Users/anshu/AppData/Local/com.vercel.cli/**)"
+      "Read(//c/Users/anshu/AppData/Local/com.vercel.cli/**)",
+      "Bash(while IFS='=' read -r key value)",
+      "Bash(do echo:*)"
     ]
   }
 }
