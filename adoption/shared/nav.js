@@ -3,9 +3,8 @@
   "use strict";
 
   var LINKS = [
-    { label: "Usage", href: "/" },
-    { label: "Lectures", href: "/lectures" },
     { label: "Checklist", href: "/checklist" },
+    { label: "Lectures", href: "/lectures" },
     { label: "Chats", href: "/chats" },
     { label: "Polls", href: "/polls" }
   ];
