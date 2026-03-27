@@ -10,7 +10,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const [orgUsers, dailyRecords, weeklyRecords] = await Promise.all([
-      fetchAllPages("https://api.anthropic.com/v1/organizations/users", headers),
+      fetchUsersPages("https://api.anthropic.com/v1/organizations/users", headers),
       fetchAllPages(
         `https://api.anthropic.com/v1/organizations/usage_report/claude_code?starting_at=${today}`,
         headers
@@ -35,7 +35,7 @@ module.exports = async function handler(req, res) {
 
     // Aggregate weekly records
     for (const rec of weeklyRecords) {
-      const email = rec.user_email || rec.email || "unknown";
+      const email = (rec.actor && rec.actor.email_address) || "unknown";
       if (!userMap[email]) {
         userMap[email] = makeEmptyUser(email);
       }
@@ -44,12 +44,12 @@ module.exports = async function handler(req, res) {
       u.weekly.cost += m.cost;
       u.weekly.inputTokens += m.inputTokens;
       u.weekly.outputTokens += m.outputTokens;
-      u.weekly.sessions += rec.num_sessions || 0;
+      u.weekly.sessions += (rec.core_metrics && rec.core_metrics.num_sessions) || 0;
     }
 
     // Aggregate daily records
     for (const rec of dailyRecords) {
-      const email = rec.user_email || rec.email || "unknown";
+      const email = (rec.actor && rec.actor.email_address) || "unknown";
       if (!userMap[email]) {
         userMap[email] = makeEmptyUser(email);
       }
@@ -58,7 +58,7 @@ module.exports = async function handler(req, res) {
       u.daily.cost += m.cost;
       u.daily.inputTokens += m.inputTokens;
       u.daily.outputTokens += m.outputTokens;
-      u.daily.sessions += rec.num_sessions || 0;
+      u.daily.sessions += (rec.core_metrics && rec.core_metrics.num_sessions) || 0;
     }
 
     res.status(200).json({
@@ -79,6 +79,26 @@ function makeEmptyUser(email) {
     daily: { cost: 0, inputTokens: 0, outputTokens: 0, sessions: 0 },
     weekly: { cost: 0, inputTokens: 0, outputTokens: 0, sessions: 0 },
   };
+}
+
+async function fetchUsersPages(baseUrl, headers) {
+  let all = [];
+  let afterId = null;
+  while (true) {
+    const url = afterId
+      ? `${baseUrl}?after_id=${afterId}&limit=100`
+      : `${baseUrl}?limit=100`;
+    const resp = await fetch(url, { headers });
+    if (!resp.ok) throw new Error(`API ${resp.status}: ${await resp.text()}`);
+    const body = await resp.json();
+    all = all.concat(body.data || []);
+    if (body.has_more && body.last_id) {
+      afterId = body.last_id;
+    } else {
+      break;
+    }
+  }
+  return all;
 }
 
 async function fetchAllPages(baseUrl, headers) {
@@ -102,12 +122,12 @@ function extractMetrics(record) {
     inputTokens = 0,
     outputTokens = 0;
   for (const m of record.model_breakdown || []) {
-    cost += m.estimated_cost_usd || 0;
-    inputTokens +=
-      (m.input_tokens || 0) +
-      (m.cache_read_tokens || 0) +
-      (m.cache_creation_tokens || 0);
-    outputTokens += m.output_tokens || 0;
+    // estimated_cost.amount is in cents — convert to dollars
+    const cents = (m.estimated_cost && m.estimated_cost.amount) || 0;
+    cost += cents / 100;
+    const t = m.tokens || {};
+    inputTokens += (t.input || 0) + (t.cache_read || 0) + (t.cache_creation || 0);
+    outputTokens += t.output || 0;
   }
   return { cost, inputTokens, outputTokens };
 }
