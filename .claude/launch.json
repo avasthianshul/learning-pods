@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "event-command-center",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8090", "-d", "portfolio/event-command-center"],
+      "port": 8090
+    },
+    {
+      "name": "signal-engine",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8765", "-d", "portfolio/signal-engine"],
+      "port": 8765
+    },
+    {
+      "name": "content-hub",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8091", "-d", "portfolio/content-hub"],
+      "port": 8091
+    }
+  ]
+}
